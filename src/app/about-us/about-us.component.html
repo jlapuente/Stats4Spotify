@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="autor">
+        <th mat-header-cell *matHeaderCellDef> Autor </th>
+        <td mat-cell *matCellDef="let element"> {{element.autor}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let element"> {{element.fecha | date:'dd/MM/yy, h:mm a'}} </td>
+      </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="comentario">
+        <th mat-header-cell *matHeaderCellDef> Comentario </th>
+        <td mat-cell *matCellDef="let element"> {{element.comentario}} </td>
+      </ng-container>
+      <ng-container matColumnDef="informacion">
+        <th mat-header-cell *matHeaderCellDef> Informacion </th>
+        <td mat-cell *matCellDef="let element">
+          <span [matTooltip]="element.detalle" class="material-icons">
+            help_outline
+          </span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  <!-- <div class="container">
+    <div class="row bottom-text">
+      <div class="col-sm">
+        <fa-icon [icon]="faGithub" [styles]="{'display': 'block', 'margin': 'auto', 'color': '#f4ac4c'}"></fa-icon>
+      </div>
+      <div class="col-sm">
+        <fa-icon [icon]="faTwitter" [styles]="{'display': 'block', 'margin': 'auto','color': '#f4ac4c'}"></fa-icon>
+      </div>
+    </div>
+  </div> -->
+  <button class="bottom-button" mat-mini-fab [matMenuTriggerFor]="aboveMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <a mat-menu-item href="https://twitter.com/batidoDoreo">
+      <fa-icon [icon]="faTwitter" [styles]="{'display': 'block', 'margin': 'auto','color': '#f4ac4c'}"></fa-icon>
+    </a>
+    <a mat-menu-item href="https://github.com/jlapuente/filoWebsite">
+      <fa-icon [icon]="faGithub" [styles]="{'display': 'block', 'margin': 'auto', 'color': '#f4ac4c'}"></fa-icon>
+    </a>
+  </mat-menu>
+</div>

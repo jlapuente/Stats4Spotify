@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+@font-face {
+  font-family: Open-Sans;
+  src: url(assets/OpenSans/OpenSans-Bold.ttf) format("opentype");
+}
+
+* {
+  font-family: Open-Sans, Helvetica, Arial, sans-serif;
+}
+
+:root {
+  --primary-color: #1db954;
+  --black-darker-color: #121212;
+  --black-color: #212121;
+  --gray-color: #535353;
+  --light-gray-color: #b3b3b3;
+  --font-size: 50px;
+}
