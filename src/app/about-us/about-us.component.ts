@@ -23,7 +23,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 })
 export class AboutUsComponent implements OnInit {
 
-  gitHubApi: string = 'https://api.github.com/repos/jlapuente/filoWebsite/commits';
+  gitHubApi: string = 'https://api.github.com/repos/jlapuente/Stats4Spotify/commits';
   commitList: Commit[] = [];
   displayedColumns: string[] = [];
   screenWidth: number = window.screen.height;
