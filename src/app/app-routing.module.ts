@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { GraficosComponent } from './graficos/graficos.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './integration/services/auth-guard.service.ts.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
   { path: 'about-us', component: AboutUsComponent },
+  { path: 'graphs', component: GraficosComponent, canActivate: [AuthGuardService]},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
