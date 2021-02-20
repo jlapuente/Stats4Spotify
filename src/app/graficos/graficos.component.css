@@ -1,23 +1,23 @@
 fa-icon{
-    color: black;
+    color: white;
     vertical-align: top;
     margin-left: 2%;
     width: 100%;
 }
 
 .graphTittle{
-    color: black;
+    color: white;
     text-align: center;
     width: 100%;
     display: block;
     /* display: ruby-text-container; */
   }
 
-@media (max-width:768px) {
+/* @media (max-width:768px) {
     .graphContainer{
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid white;
     }
-  }
+  } */
 /* canvas{
     background-color: whitesmoke;
 } */
@@ -29,11 +29,11 @@ fa-icon{
 }
 
 .modal-body{
-    color:black
+    color:white
 }
 span.modal-title{
     font-size: larger;
     font-weight: 500;
     line-height: 1.2;
-    color: black;
+    color: white;
 }

@@ -90,7 +90,7 @@ export class SpotifyService {
   }
 
   getTopArtist(v: string) {
-    return this.getInfo(`me/top/artists?time_range=${v}&limit=50`)
+    return this.getInfo(`me/top/artists?time_range=${v}&limit=12`)
   }
   getSavedTracks(offset: number) {
     return this.getInfo(`me/tracks?offset=${offset}&limit=50`)

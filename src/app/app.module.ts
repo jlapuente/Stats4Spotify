@@ -10,11 +10,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { GraficosComponent } from './graficos/graficos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    GraficosComponent,
     AboutUsComponent
   ],
   imports: [

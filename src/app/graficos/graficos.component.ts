@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { SpotifyService } from '../integration/services/spotify.service.js';
-import { CONSTANTS } from '../properties/constants.js';
 declare var $:any;
 
 @Component({
@@ -25,24 +24,39 @@ export class GraficosComponent implements OnInit {
   faInfoCircle = faInfoCircle;
   $: any;
 
+
   explicacionGraficaGeneros = "Esta gráfica muestra los géneros mas repetidos entre tus cincuenta artistas mas escuchados. Este dato se toma de los artistas y no de las canciones por como Spotify almacena los datos, por lo tanto, no es 100% preciso, ya que un artista puede tener una mayoria de canciones de un mismo género y una minoria de otro distinto."
   explicacionGraficaArtistas = "Esta gráfica muestra los artistas de tu biblioteca de los que mas canciones tienes guardadas. El número que se muestra en la gráfica es la cantidad de canciones que tienes guardadas en <u>'Canciones que te gustan'</u> "
   // itemGeneros: object = { 'label' : string, 'value' : number };
 
+  colors: string[] = [
+    'rgba(255, 173, 173, 0.6)',
+    'rgba(255, 214, 165, 0.6)',
+    'rgba(253, 255, 182, 0.6)',
+    'rgba(202, 255, 191, 0.6)',
+    'rgba(155, 246, 255, 0.6)',
+    'rgba(160, 196, 255, 0.6)',
+    'rgba(189, 178, 255, 0.6)',
+    'rgba(255, 198, 255, 0.6)',
+  ];
+  borderColors: string[] = [
+    'rgba(255, 198, 255, 1)',
+  ]
   ngOnInit() {
 
     // Inicializamos los tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-    // this.getArtists();
+    this.getArtists();
     
     let offSet = 0;
-    // this.getSavedTracks();
+    this.getSavedTracks();
   }
 
   
   getSavedTracks(){
     this._spotifyService.getSavedTracks(this.offSet).subscribe((data: any) => {
+      console.log(data);
       // this.listaCanciones.push(data.items)
       data.items.forEach(element => {
         this.listaCanciones.push(element);
@@ -90,11 +104,16 @@ export class GraficosComponent implements OnInit {
         datasets: [{
           label: '# of times seen',
           data: values,
-          backgroundColor: CONSTANTS.COLORS,
-          borderColor: CONSTANTS.BORDER_COLORS,
+          backgroundColor: this.colors,
+          borderColor: this.borderColors,
           borderWidth: 1
         }]
       },
+      // options: {
+      //   chartArea: {
+      //     backgroundColor: 'rgba(255, 255, 252, 1)'
+      //   },
+      // }
     });
   }
   getArtists() {
