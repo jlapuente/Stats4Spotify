@@ -11,7 +11,7 @@ export class SpotifyService {
     clientSecret: '25bf7efed7424019a632ebf6520be15e',
     accessToken: '',
     // redirect_uri: 'http://localhost:4200/' // Your redirect uri
-    redirect_uri: 'https://jlapuente.github.io/Stats4Spotify//' // Your redirect uri
+    redirect_uri: 'https://jlapuente.github.io/Stats4Spotify/' // Your redirect uri
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
   public poolURlS = {
