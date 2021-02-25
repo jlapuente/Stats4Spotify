@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from '../services/spotify.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AccessTokenComponent implements OnInit {
 
-  constructor(private _SpotifyService: SpotifyService, private _route: Router,) {
+  constructor(private _route: Router) {
 
     const refererURL = sessionStorage.getItem('refererURL');
 

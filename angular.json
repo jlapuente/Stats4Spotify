@@ -25,7 +25,7 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-                "src/assets"
+              "src/assets"
             ],
             "styles": [
               "src/custom-theme.scss",
@@ -128,8 +128,13 @@
               "devServerTarget": "Stats4Spotify:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Stats4Spotify"
 }
