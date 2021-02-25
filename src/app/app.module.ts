@@ -11,13 +11,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { GraficosComponent } from './graficos/graficos.component';
+import { AccessTokenComponent } from './integration/access-token/access-token.component'
+import { DomseguroPipe } from './integration/pipes/domseguro.pipe'
+import { NoimagePipe } from './integration/pipes/noimage.pipe'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     GraficosComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    AccessTokenComponent,
+    DomseguroPipe,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,
