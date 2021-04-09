@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from '../../../node_modules/chart.js'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { SpotifyService } from '../integration/services/spotify.service.js';
+import { CONSTANTS } from '../properties/constants.js';
 declare var $:any;
 
 @Component({
@@ -119,7 +120,7 @@ export class GraficosComponent implements OnInit {
   getArtists() {
     // this.loading = true;
     let myhash = new Map;
-    this._spotifyService.getTopArtist("long_term").subscribe((data: any) => {
+    this._spotifyService.getTopArtist("long_term", CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
       this.listaArtistas = data.items;
       this.listaArtistas.forEach(element => {
         let artista: any = element;

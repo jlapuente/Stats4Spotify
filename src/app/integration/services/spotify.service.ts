@@ -85,12 +85,12 @@ export class SpotifyService {
 
   }
 
-  getTopTracks2(v: string) {
-    return this.getInfo(`me/top/tracks?time_range=${v}&limit=50`)
+  getTopTracks2(v: string, limit: number) {
+    return this.getInfo(`me/top/tracks?time_range=${v}&limit=${limit}`)
   }
 
-  getTopArtist(v: string) {
-    return this.getInfo(`me/top/artists?time_range=${v}&limit=12`)
+  getTopArtist(v: string, limit: number) {
+    return this.getInfo(`me/top/artists?time_range=${v}&limit=${limit}`)
   }
   getSavedTracks(offset: number) {
     return this.getInfo(`me/tracks?offset=${offset}&limit=50`)
@@ -112,8 +112,6 @@ export class SpotifyService {
   }
 
   addSongsToPlayList(playListId: string, idList: any[]) {
-    console.log(idList);
-    console.log(idList);
     let body = {
       'uris': idList,
     }

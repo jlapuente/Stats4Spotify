@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col-sm-12 col-md-2">
+    <div class="filterContainer">
+      <mat-form-field appearance="outline">
+        <mat-label>Period</mat-label>
+        <mat-select (selectionChange)="updateSearch()" [(value)]="selectedOption">
+          <mat-option></mat-option>
+          <mat-option [value]="option.value" *ngFor="let option of selectOptions">{{ option.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" [color]="primary">
+        <mat-label>Period</mat-label>
+        <mat-select (selectionChange)="updateSearch()" [(value)]="selectedSearch">
+          <mat-option></mat-option>
+          <mat-option [value]="option.value" *ngFor="let option of searchList">{{ option.viewValue }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-8">
+    <div class="receiptContainerDiv">
+      <div id="receipt">
+        <div id="receiptContainer" class="receiptContainer">
+          <h2 class="logo">
+            Stats4Spotify
+          </h2>
+          <p class="period">
+            {{period}}
+          </p>
+          <p class="date">
+            ORDER #0001 - {{selectedSearch}} FOR {{username}}
+          </p>
+          <p class="date">
+            {{date}}
+          </p>
+          <table class="tracks">
+            <thead>
+              <tr>
+                <td class="begin">
+                  TOP
+                </td>
+                <td>
+                  SONG
+                </td>
+                <td class="length">
+                  TIME
+                </td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of items; let i = index">
+                <td class="begin">
+                  {{i+1}}
+                </td>
+                <td class="name">
+                  <span *ngIf="item.type == 'artist'">
+                    {{item.name}}
+                  </span>
+                  <span *ngIf="item.type != 'artist'">
+                    {{item.name}}
+                    <span *ngFor="let artist of item.artists">
+                      - {{artist.name}}
+                    </span>
+                  </span>
+                </td>
+                <span *ngIf="item.type != 'artist'">
+                  <td class="length">
+                    {{item.duration_ms | date:'mm:ss'}}
+                  </td>
+                </span>
+              </tr>
+
+              <tr class="total-counts">
+                <td class="begin" colspan="2">
+                  ITEM COUNT:
+                </td>
+                <td class="length">
+                  10
+                </td>
+              </tr>
+              <tr class="total-counts-end">
+                <td class="begin" colspan="2">
+                  TOTAL:
+                </td>
+                <td class="length">
+                  35:56
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="date">
+            CARD #: **** **** **** {{year}}
+          </p>
+          <p class="date">
+            MEMBERSHIP: {{membership}}
+          </p>
+          <p class="date">
+            CARDHOLDER: {{username}}
+          </p>
+          <div class="thanks">
+            <p>
+              THANK YOU FOR VISITING!
+            </p>
+            <img src="../../assets/barcode.png">
+            <p class="website">
+              {{url}}
+            </p>
+          </div>
+        </div>
+        <button class="time-btn" id="download" (click)="downloadImage()" >Download Image</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-0 col-md-2">
+  </div>
+
+</div>

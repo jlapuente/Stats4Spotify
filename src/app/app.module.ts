@@ -13,7 +13,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { GraficosComponent } from './graficos/graficos.component';
 import { AccessTokenComponent } from './integration/access-token/access-token.component'
 import { DomseguroPipe } from './integration/pipes/domseguro.pipe'
-import { NoimagePipe } from './integration/pipes/noimage.pipe'
+import { NoimagePipe } from './integration/pipes/noimage.pipe';
+import { ReceiptComponent } from './receipt/receipt.component';
+import { MsToSecondsPipe } from './integration/pipes/ms-to-seconds.pipe'
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { NoimagePipe } from './integration/pipes/noimage.pipe'
     AboutUsComponent,
     AccessTokenComponent,
     DomseguroPipe,
-    NoimagePipe
+    NoimagePipe,
+    ReceiptComponent,
+    MsToSecondsPipe
   ],
   imports: [
     BrowserModule,

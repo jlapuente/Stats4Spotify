@@ -9,10 +9,13 @@
   <br>
   <button (click)="downloadImage()"> PRUEBA </button>
 </div>
-<div class="container" id="printableHTML" #screen>
-  <div class="row">
-    <div class="col-sm-6 col-md-4" *ngFor="let element of songList">
-      <img src={{element.images[0].url}} alt={{element.name}} class="img-fluid">
+<div class="container" id="printableHTML" style="background-color: black;">
+  <div *ngFor="let element of matriz">
+    <div class="row">
+      <div *ngFor="let artist of element" class="col-sm-6 col-md-4">
+        <img src={{artist.images[0].url}} alt={{artist.name}} class="img-fluid">
+        <h1>{{artist.name}}</h1>
+      </div>
     </div>
   </div>
 </div>
@@ -21,3 +24,4 @@
   <img #canvas>
   <a #downloadLink></a>
 </div>
+<canvas id="canvas"> </canvas>

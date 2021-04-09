@@ -37,7 +37,10 @@ export class Link {
     this.text = text;
     this.href = href;
   }
-
+}
+export class SelectOption {
+  value: string;
+  viewValue: string;
 }
 export class Commit {
   autor: string;

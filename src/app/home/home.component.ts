@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { Component, OnInit} from '@angular/core';
 import html2canvas from 'html2canvas';
-import { map } from 'rxjs/operators';
 import { SpotifyService } from '../integration/services/spotify.service';
+import domtoimage from 'dom-to-image';
+import { saveAs } from '../../../node_modules/file-saver';
+import { CONSTANTS, SelectOption } from '../properties/constants';
 
 interface Food {
   value: string;
@@ -18,17 +18,13 @@ interface Food {
 export class HomeComponent implements OnInit {
   loading: boolean = false;
   songList: any[];
-
-  foods: Food[] = [
+  matriz: any[] = [];
+  foods: SelectOption[] = [
     { value: 'short_term', viewValue: 'Ultimos 3 meses' },
     { value: 'medium_term', viewValue: 'Ultimos 6 meses' },
     { value: 'long_term', viewValue: 'Desde siempre' }
   ];
   selectedFood = this.foods[2].value;
-
-  @ViewChild('screen', { static: false }) screen: ElementRef;
-  @ViewChild('canvas', { static: true }) canvas: ElementRef;
-  @ViewChild('downloadLink', { static: true }) downloadLink: ElementRef;
 
   constructor(private _spotifyService: SpotifyService) {
 
@@ -36,13 +32,13 @@ export class HomeComponent implements OnInit {
 
       this.loading = true;
 
-      this._spotifyService.getTopArtist("long_term").subscribe((data: any) => {
+      this._spotifyService.getTopArtist("long_term", CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
 
         console.log(this._spotifyService.credentials);
         console.log(data);
         this.songList = data.items;
         this.loading = false;
-
+        this.createMatriz(this.songList);
       }, error => {
 
         error.status == 401 && (this._spotifyService.tokenRefreshURL());
@@ -60,19 +56,33 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // downloadImage() {
+  //   console.log(this.screen);
+  //   html2canvas(this.screen.nativeElement).then(canvas => {
+  //     // document.body.appendChild(canvas) // => pay attention to this line
+  //     // this.canvas.nativeElement.src = canvas.toDataURL();
+  //     // this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+  //     // this.downloadLink.nativeElement.download = 'marble-diagram.png';
+  //     // this.downloadLink.nativeElement.click();
+  //     $('#canvas').replaceWith(canvas);
+  //   });
+  // }
   downloadImage() {
-    console.log(this.screen);
-    html2canvas(this.screen.nativeElement).then(canvas => {
-      document.body.appendChild(canvas) // => pay attention to this line
-      this.canvas.nativeElement.src = canvas.toDataURL();
-      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-      this.downloadLink.nativeElement.download = 'marble-diagram.png';
-      this.downloadLink.nativeElement.click();
-    });
+    domtoimage.toBlob(document.getElementById('printableHTML')).then(function (blob) {
+        saveAs(blob, 'my-node.png');
+      });
   }
 
   ngOnInit(){
 
+  }
+
+  createMatriz(array: any[]){
+    var res = array.reduce((a, c, i) => {
+      return i % 3 === 0 ? a.concat([array.slice(i, i + 3)]) : a;
+    }, []);
+    this.matriz = res;
+    console.log(res)
   }
   
 }
