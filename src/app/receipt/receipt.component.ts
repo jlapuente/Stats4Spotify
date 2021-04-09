@@ -18,11 +18,11 @@ export class ReceiptComponent implements OnInit {
   period: string;
   items: any[];
   selectOptions: SelectOption[] = [
-    { value: 'short_term', viewValue: 'Ultimos 3 meses' },
-    { value: 'medium_term', viewValue: 'Ultimos 6 meses' },
-    { value: 'long_term', viewValue: 'Desde siempre' }
+    { value: 'short_term', viewValue: 'Last Month' },
+    { value: 'medium_term', viewValue: 'Last six months' },
+    { value: 'long_term', viewValue: 'From the beginning' }
   ];
-  selectedOption = this.selectOptions[2].value;
+  selectedOption = this.selectOptions[0].value;
   
   searchList: SelectOption[] = [
     { value: 'tracks', viewValue: 'Canciones' },
@@ -33,6 +33,7 @@ export class ReceiptComponent implements OnInit {
   user:any;
   membership: string;
   date: any;
+  totalTime: number;
 
   constructor(private _spotifyService: SpotifyService) { }
 
@@ -42,7 +43,7 @@ export class ReceiptComponent implements OnInit {
     this.date = new Date();
     this.username = "";
     this.clientId = "";
-    this.period = "Last 6 Months"
+    this.period = this.selectOptions.find(i => i.value === this.selectedOption).viewValue;
     this.url = "https://jlapuente.github.io/Stats4Spotify/";
     this._spotifyService.getCurrentUser().subscribe((data: any) => {
       console.log(data);
@@ -53,11 +54,12 @@ export class ReceiptComponent implements OnInit {
     }, error => {
       error.status == 401 && (this._spotifyService.tokenRefreshURL());
     });;
+
+    this.updateSearch();
   }
 
 
   updateSearch() {
-    console.log("he entrado");
     this.period = this.selectOptions.find(i => i.value === this.selectedOption).viewValue;
     if (this._spotifyService.checkTokenSpo()) {
       // this.loading = true;
@@ -76,6 +78,8 @@ export class ReceiptComponent implements OnInit {
           console.log(this._spotifyService.credentials);
           console.log(data);
           this.items = data.items;
+          this.totalTime = 0;
+          this.totalTime = this.items.reduce((sum, current) => sum + current.duration_ms, 0);
           // this.loading = false;
         }, error => {
           error.status == 401 && (this._spotifyService.tokenRefreshURL());

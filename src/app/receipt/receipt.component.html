@@ -1,20 +1,21 @@
 <div class="row">
   <div class="col-sm-12 col-md-2">
     <div class="filterContainer">
-      <mat-form-field appearance="outline">
+      <mat-form-field  class="mat-filter"  appearance="outline">
         <mat-label>Period</mat-label>
         <mat-select (selectionChange)="updateSearch()" [(value)]="selectedOption">
           <mat-option></mat-option>
           <mat-option [value]="option.value" *ngFor="let option of selectOptions">{{ option.viewValue }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="mat-filter" appearance="outline">
         <mat-label>Period</mat-label>
         <mat-select (selectionChange)="updateSearch()" [(value)]="selectedSearch">
           <mat-option></mat-option>
           <mat-option [value]="option.value" *ngFor="let option of searchList">{{ option.viewValue }}</mat-option>
         </mat-select>
       </mat-form-field>
+      <button mat-raised-button class="mat-filter" color="primary" (click)="downloadImage()">Download Receipt</button>
     </div>
   </div>
   <div class="col-sm-12 col-md-8">
@@ -25,13 +26,13 @@
             Stats4Spotify
           </h2>
           <p class="period">
-            {{period}}
+            {{period}} - DATA
           </p>
           <p class="date">
-            ORDER #0001 - MOST LISTENED {{selectedSearch}} BY {{username}}
+            ORDER #0001 - {{date | date:'dd/MM/yy'}}
           </p>
           <p class="date">
-            {{date | date:'dd/MM/yy'}}
+            MOST LISTENED {{selectedSearch}} BY {{username}}
           </p>
           <table class="tracks">
             <thead>
@@ -84,7 +85,7 @@
                   TOTAL:
                 </td>
                 <td class="length">
-                  35:56
+                  {{totalTime | date:'mm:ss'}}
                 </td>
               </tr>
             </tbody>
@@ -108,7 +109,6 @@
             </p> -->
           </div>
         </div>
-        <button class="time-btn" id="download" (click)="downloadImage()" >Download Image</button>
       </div>
     </div>
   </div>

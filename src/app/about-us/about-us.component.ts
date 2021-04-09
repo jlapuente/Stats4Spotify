@@ -53,7 +53,7 @@ export class AboutUsComponent implements OnInit {
   searchCommits() {
     let headers: HttpHeaders = new HttpHeaders();
 
-    const options = { params: new HttpParams().set('name', 'prueba') };
+    const options = { params: new HttpParams()};
 
     return this.http.get<any[]>(this.gitHubApi, options).subscribe(data => {
       data.forEach(element => {
