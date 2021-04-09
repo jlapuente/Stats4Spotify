@@ -28,10 +28,10 @@
             {{period}}
           </p>
           <p class="date">
-            ORDER #0001 - {{selectedSearch}} FOR {{username}}
+            ORDER #0001 - MOST LISTENED {{selectedSearch}} BY {{username}}
           </p>
           <p class="date">
-            {{date}}
+            {{date | date:'dd/MM/yy'}}
           </p>
           <table class="tracks">
             <thead>
@@ -103,9 +103,9 @@
               THANK YOU FOR VISITING!
             </p>
             <img src="./assets/barcode.png">
-            <p class="website">
+            <!-- <p class="website">
               {{url}}
-            </p>
+            </p> -->
           </div>
         </div>
         <button class="time-btn" id="download" (click)="downloadImage()" >Download Image</button>
