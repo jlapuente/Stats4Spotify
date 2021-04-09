@@ -8,7 +8,7 @@
           <mat-option [value]="option.value" *ngFor="let option of selectOptions">{{ option.viewValue }}</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" [color]="primary">
+      <mat-form-field appearance="outline">
         <mat-label>Period</mat-label>
         <mat-select (selectionChange)="updateSearch()" [(value)]="selectedSearch">
           <mat-option></mat-option>
@@ -102,7 +102,7 @@
             <p>
               THANK YOU FOR VISITING!
             </p>
-            <img src="../../assets/barcode.png">
+            <img src="./assets/barcode.png">
             <p class="website">
               {{url}}
             </p>

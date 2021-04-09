@@ -32,12 +32,14 @@ export class ReceiptComponent implements OnInit {
 
   user:any;
   membership: string;
+  date: any;
 
   constructor(private _spotifyService: SpotifyService) { }
 
   ngOnInit() {
   
     this.year = new Date().getFullYear();
+    this.date = new Date();
     this.username = "";
     this.clientId = "";
     this.period = "Last 6 Months"
