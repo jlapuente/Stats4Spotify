@@ -32,7 +32,7 @@
             ORDER #0001 - {{date | date:'dd/MM/yy'}}
           </p>
           <p class="date">
-            MOST LISTENED {{selectedSearch}} BY {{username}}
+            MOST LISTENED {{selectedSearch}} OF {{username}}
           </p>
           <table class="tracks">
             <thead>
@@ -41,7 +41,12 @@
                   TOP
                 </td>
                 <td>
-                  SONG
+                  <span *ngIf="isArtist">
+                    NAME
+                  </span>
+                  <span *ngIf="!isArtist">
+                    SONG
+                  </span>
                 </td>
                 <td class="length">
                   <span *ngIf="isArtist">
@@ -111,7 +116,7 @@
                 {{url}}
               </span>
             </p>
-            <img src="./assets/barcode.png">
+            <!-- <img src="./assets/barcode.png"> -->
           </div>
         </div>
       </div>
