@@ -35,6 +35,8 @@ export class ReceiptComponent implements OnInit {
   date: any;
   totalTime: number;
 
+  isArtist: boolean = true;
+
   constructor(private _spotifyService: SpotifyService) { }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class ReceiptComponent implements OnInit {
     this.username = "";
     this.clientId = "";
     this.period = this.selectOptions.find(i => i.value === this.selectedOption).viewValue;
-    this.url = "https://jlapuente.github.io/Stats4Spotify/";
+    this.url = "jlapuente.github.io/Stats4Spotify/";
     this._spotifyService.getCurrentUser().subscribe((data: any) => {
       console.log(data);
       this.user = data;
@@ -61,6 +63,9 @@ export class ReceiptComponent implements OnInit {
 
   updateSearch() {
     this.period = this.selectOptions.find(i => i.value === this.selectedOption).viewValue;
+    this.isArtist = this.selectedSearch == this.searchList[1].value;
+    console.log(this.selectedSearch);
+    console.log(this.isArtist);
     if (this._spotifyService.checkTokenSpo()) {
       // this.loading = true;
 

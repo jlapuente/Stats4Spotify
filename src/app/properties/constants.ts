@@ -4,6 +4,7 @@ export class CONSTANTS {
   static readonly BORDER_COLORS: string[] = ['rgba(84, 71, 140, 1)', 'rgba(44, 105, 154, 1)', 'rgba(4, 139, 168, 1)', 'rgba(13, 179, 158, 1)', 'rgba(22, 219, 147, 1)', 'rgba(131, 227, 119, 1)', 'rgba(185, 231, 105, 1)', 'rgba(239, 234, 90, 1)', 'rgba(241, 196, 83, 1)', 'rgba(242, 158, 76, 1)', 'rgba(255, 56, 100, 1)'];
   static readonly SINGLE_ESCALE = 1;
   static readonly TEN_ESCALE = 10;
+  static readonly TWELVE_ESCALE = 12;
   static readonly FIVE_ESCALE = 5;
   static readonly assetsFolder: string = 'src/assets';
   static readonly mainFolder: string = '../..';

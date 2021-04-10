@@ -12,10 +12,10 @@ export class SpotifyService {
     clientId: SECRET_CONSTANTS.client_id,
     clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: SECRET_CONSTANTS.redirect_uri
+    redirect_uri: SECRET_CONSTANTS.redirect_uri_pro
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
-  
+
   public poolURlS = {
 
     authorize: 'https://accounts.spotify.com/es-ES/authorize?client_id=' +

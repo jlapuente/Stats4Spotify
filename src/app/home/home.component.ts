@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
 
       this.loading = true;
 
-      this._spotifyService.getTopArtist("long_term", CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
+      this._spotifyService.getTopArtist("long_term", CONSTANTS.TWELVE_ESCALE).subscribe((data: any) => {
 
         console.log(this._spotifyService.credentials);
         console.log(data);
