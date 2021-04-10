@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators/';
+import { SECRET_CONSTANTS } from 'src/app/properties/secret-constants';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SpotifyService {
   public credentials = {
-    clientId: '9bdfac8401034ea5afed42d92faec30f',
-    clientSecret: '25bf7efed7424019a632ebf6520be15e',
+    clientId: SECRET_CONSTANTS.client_id,
+    clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: 'http://localhost:4200/' // Your redirect uri
-    // redirect_uri: 'https://jlapuente.github.io/Stats4Spotify/' // Your redirect uri PRO
+    redirect_uri: SECRET_CONSTANTS.redirect_uri
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
+  
   public poolURlS = {
 
     authorize: 'https://accounts.spotify.com/es-ES/authorize?client_id=' +
