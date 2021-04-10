@@ -29,13 +29,14 @@ fa-icon{
 }
 
 .modal-body{
-    color:white
+    color:black;
+    text-align: justify;
 }
 span.modal-title{
     font-size: larger;
     font-weight: 500;
     line-height: 1.2;
-    color: white;
+    color: black;
 }
 
 @font-face {

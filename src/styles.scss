@@ -14,3 +14,7 @@ body {
   --light-gray-color: #b3b3b3;
   --font-size: 50px;
 }
+
+.modal-backdrop{
+  z-index: auto !important;
+}
