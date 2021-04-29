@@ -69,9 +69,9 @@
                     {{item.name}}
                   </span>
                   <span *ngIf="item.type != 'artist'">
-                    {{item.name}}
+                    {{item.name | characterSanitizer}}
                     <span *ngFor="let artist of item.artists">
-                      - {{artist.name}}
+                      - {{artist.name | characterSanitizer}}
                     </span>
                   </span>
                 </td>

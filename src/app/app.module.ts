@@ -16,6 +16,7 @@ import { DomseguroPipe } from './integration/pipes/domseguro.pipe'
 import { NoimagePipe } from './integration/pipes/noimage.pipe';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { MsToSecondsPipe } from './integration/pipes/ms-to-seconds.pipe'
+import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.pipe'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MsToSecondsPipe } from './integration/pipes/ms-to-seconds.pipe'
     DomseguroPipe,
     NoimagePipe,
     ReceiptComponent,
-    MsToSecondsPipe
+    MsToSecondsPipe,
+    CharacterSanitizerPipe
   ],
   imports: [
     BrowserModule,
