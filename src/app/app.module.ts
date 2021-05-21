@@ -16,7 +16,8 @@ import { DomseguroPipe } from './integration/pipes/domseguro.pipe'
 import { NoimagePipe } from './integration/pipes/noimage.pipe';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { MsToSecondsPipe } from './integration/pipes/ms-to-seconds.pipe'
-import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.pipe'
+import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.pipe';
+import { ComparationComponent } from './comparation/comparation.component'
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.
     NoimagePipe,
     ReceiptComponent,
     MsToSecondsPipe,
-    CharacterSanitizerPipe
+    CharacterSanitizerPipe,
+    ComparationComponent
   ],
   imports: [
     BrowserModule,

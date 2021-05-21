@@ -1,32 +1,30 @@
-<div class="row">
-  <div class="col-sm-0 col-md-2">
-    <!-- <mat-form-field appearance="fill">
-      <mat-label>Favorite Food</mat-label>
-      <mat-select [(value)]="selectedFood">
-        <mat-option></mat-option>
-        <mat-option [value]="option.value" *ngFor="let option of foods">{{ option.viewValue }}</mat-option>
-      </mat-select>
-    </mat-form-field> 
+<!-- <div data-spy="scroll" class="row main-container" style="padding-top:2%;padding-bottom:2%">
+  <div class="info-container col-sm-12 col-md-2">
+    <span style="">Escuchados recientemente</span>
     <br>
-    <button (click)="downloadImage()"> PRUEBA </button>-->
+    <span style="font-size:large">Sumérgete de nuevo</span>
+    <br>
+    <span style="font-size: x-large;">Recupera lo que estabas escuchando, justo donde lo dejaste.</span>
+    <br>
+    <button mat-raised-button color="primary">Accede al reproductor web de Spotify</button>
   </div>
-  <div class="col-sm-12 col-md-8">
-    <div class="container" id="printableHTML" style="background-color: black;">
-      <h1 class="artistName">Your most listened artists</h1>
-    <div *ngFor="let element of matriz">
-      <div class="row">
-        <div *ngFor="let artist of element" class="col-sm-6 col-md-4" style="display: inline;">
-          <!-- <img src={{artist.images[0].url}} alt={{artist.name}} class="img-fluid"> -->
-          <div [style.background-image]="'url(' + artist.images[0].url + ')'" class="image-div" style="background-size: contain !important; "></div>
-          <h1 class="artistName">{{artist.name}}</h1>
+  <div class="portrait-container col-sm-12 col-md-8">
+    <div *ngFor="let element of matriz" class="row">
+        <div *ngFor="let artist of element" class="col-sm-4 col-md-4">
+          <div [style.background-image]="'url(' + artist.images[0].url + ')'" class="image-div"
+            style="background-size: contain !important; "></div>
         </div>
-      </div>
     </div>
   </div>
-  </div>
-  <div id="download">
-    <img #canvas>
-    <a #downloadLink></a>
+</div> -->
+
+<div class="row flex-row">
+  <div class="col-xs-12 col-md-4 hero-intro">
+    <small>Escuchados recientemente</small>
+    <h1 class="display-2 premium-display-2" style="font-size: 48px;">Sumérgete de nuevo</h1>
+    <h3>Recupera lo que estabas escuchando, justo donde lo dejaste.</h3>
+    <a id="seg-hp-open-player" class="btn btn-lg btn-green btn-cta" role="button" href="https://open.spotify.com/browse"
+      data-tracking="{&quot;category&quot;: &quot;home&quot;, &quot;action&quot;: &quot;play&quot;}">Abrir el reproductor
+      web</a>
   </div>
 </div>
-<canvas id="canvas"> </canvas>
