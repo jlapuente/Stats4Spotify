@@ -1,30 +1,57 @@
-<!-- <div data-spy="scroll" class="row main-container" style="padding-top:2%;padding-bottom:2%">
-  <div class="info-container col-sm-12 col-md-2">
-    <span style="">Escuchados recientemente</span>
-    <br>
-    <span style="font-size:large">Sumérgete de nuevo</span>
-    <br>
-    <span style="font-size: x-large;">Recupera lo que estabas escuchando, justo donde lo dejaste.</span>
-    <br>
-    <button mat-raised-button color="primary">Accede al reproductor web de Spotify</button>
-  </div>
-  <div class="portrait-container col-sm-12 col-md-8">
-    <div *ngFor="let element of matriz" class="row">
-        <div *ngFor="let artist of element" class="col-sm-4 col-md-4">
-          <div [style.background-image]="'url(' + artist.images[0].url + ')'" class="image-div"
-            style="background-size: contain !important; "></div>
+<div class="index-segmented-body">
+  <section class="section-hero">
+    <div class="hero-img hero-bg-premium"></div>
+    <div class="hero-img premium-gradient"></div>
+    <div class="container premium-promo">
+      <div class="row flex-row">
+        <div class="col-xs-12 col-md-4 hero-intro">
+          <small>Escuchados recientemente</small>
+          <h1 class="display-2 premium-display-2" style="font-size: 48px;">Sumérgete de nuevo</h1>
+          <h3>Recupera lo que estabas escuchando, justo donde lo dejaste.</h3>
+          <a id="seg-hp-open-player" class="btn btn-lg btn-green btn-cta" role="button"
+            href="https://open.spotify.com/browse">Abrir el
+            reproductor web</a>
         </div>
+        <div class="col-xs-12 col-md-8">
+          <div class="row" style="display: unset; flex-wrap: unset;">
+            <div class="album-results">
+              <ul>
+                <li *ngFor="let artist of songList" class="col-xs-12 col-sm-4 js-album-results-1" tabindex="0"
+                  data-sr-id="4"
+                  style="visibility: visible; opacity: 1; transition: opacity 0.5s cubic-bezier(0.5, 0, 0, 1) 0s;">
+                  <figure (click)="redirect(artist.external_urls)">
+                    <div class="box">
+                      <div class="content">
+                        <img class="img-responsive" [src]="artist.images[0].url" title="artist.name" alt="artist.name"
+                          (click)="redirect(artist.external_urls)">
+                      </div>
+                    </div>
+                    <div class="hidden-xs content-overlay" (click)="redirect(artist.external_urls)"></div>
+                    <div class="hidden-xs content-details">
+                      <figcaption class="album-play-icon">
+                        <svg>
+                          <use xlink:href="#album-play"></use>
+                        </svg>
+                        <h2 class="text-white">{{artist.name}}</h2>
+                        <!-- <h4 class="text-white">{{artist.name}}</h4> -->
+                      </figcaption>
+                    </div>
+                  </figure>
+                  <figcaption class="scroll hidden-sm hidden-md hidden-lg">
+                    <h2 (click)="redirect(artist.external_urls)">Rewrite The
+                      Stars</h2>
+                    <h4 (click)="redirect(artist.external_urls)">{{artist.name}}
+                    </h4>
+                    <div id="segmented-play-now" class="btn btn-link" role="button">
+                      <a href="artist.external_urls" (click)="redirect(artist.external_urls)">ESCUCHAR YA</a>
+                    </div>
+                  </figcaption>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div> -->
-
-<div class="row flex-row">
-  <div class="col-xs-12 col-md-4 hero-intro">
-    <small>Escuchados recientemente</small>
-    <h1 class="display-2 premium-display-2" style="font-size: 48px;">Sumérgete de nuevo</h1>
-    <h3>Recupera lo que estabas escuchando, justo donde lo dejaste.</h3>
-    <a id="seg-hp-open-player" class="btn btn-lg btn-green btn-cta" role="button" href="https://open.spotify.com/browse"
-      data-tracking="{&quot;category&quot;: &quot;home&quot;, &quot;action&quot;: &quot;play&quot;}">Abrir el reproductor
-      web</a>
-  </div>
+  </section>
 </div>
