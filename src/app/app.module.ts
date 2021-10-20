@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,9 @@ import { NoimagePipe } from './integration/pipes/noimage.pipe';
 import { ReceiptComponent } from './receipt/receipt.component';
 import { MsToSecondsPipe } from './integration/pipes/ms-to-seconds.pipe'
 import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.pipe';
-import { ComparationComponent } from './comparation/comparation.component'
+import { ComparationComponent } from './comparation/comparation.component';
+import { PlayListComponent } from './play-list/play-list.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { ComparationComponent } from './comparation/comparation.component'
     ReceiptComponent,
     MsToSecondsPipe,
     CharacterSanitizerPipe,
-    ComparationComponent
+    ComparationComponent,
+    PlayListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,9 @@ import { ComparationComponent } from './comparation/comparation.component'
     MatSelectModule,
     FormsModule,
     FontAwesomeModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
