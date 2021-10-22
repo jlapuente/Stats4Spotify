@@ -54,11 +54,14 @@ export class HomeComponent implements OnInit {
       {value: 'es', label: 'spain'},
     ]
     this.langSession = sessionStorage.getItem("lang");
+    if(this.langSession.indexOf("-") > 0 ){
+      this.langSession = this.langSession.split("-")[0];
+    }
     if(this.langSession){
       this.selectedLanguage = this.langSession;
       this.translate.use(this.langSession);
     } else {
-      this.selectedLanguage = this.getLang();
+      this.selectedLanguage = this.getLang().split("-")[0];
       this.changeLanguage();
     }
     console.log(this.langSession);

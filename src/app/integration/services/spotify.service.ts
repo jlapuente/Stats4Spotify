@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators/';
-import { SECRET_CONSTANTS } from 'src/app/properties/secret-constants';
+import { SECRET_CONSTANTS } from '../../properties/secret-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class SpotifyService {
     clientId: SECRET_CONSTANTS.client_id,
     clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: SECRET_CONSTANTS.redirect_uri
+    redirect_uri: SECRET_CONSTANTS.redirect_uri_pro
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
 
