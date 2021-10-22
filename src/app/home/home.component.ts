@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
       {value: 'es', label: 'spain'},
     ]
     this.langSession = sessionStorage.getItem("lang");
-    if(this.langSession.indexOf("-") > 0 ){
+    if(this.langSession != null && this.langSession.indexOf("-") > 0 ){
       this.langSession = this.langSession.split("-")[0];
     }
     if(this.langSession){
