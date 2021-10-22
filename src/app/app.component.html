@@ -1,4 +1,4 @@
-<mat-toolbar color="dark-background">
+<mat-toolbar color="dark-background" style="height: 8vh; min-height: unset;">
   <mat-toolbar-row>
     <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
@@ -6,16 +6,11 @@
     <h1>Stats for Spotify</h1>
     <span class="menu-spacer"></span>
   </mat-toolbar-row>
-
-  <!-- <mat-toolbar-row>
-    <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
-  </mat-toolbar-row> -->
 </mat-toolbar>
 
-<mat-sidenav-container style="height: 90%;">
+<mat-sidenav-container style="height: 92vh;">
   <mat-sidenav #sidenav>
     <mat-nav-list>
-
       <a mat-list-item [routerLink]="'/home'"> Inicio </a>
       <a mat-list-item [routerLink]="'/about-us'"> Histórico de Cambios </a>
       <a mat-list-item [routerLink]="'/graphs'"> Gráficos </a>

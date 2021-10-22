@@ -143,16 +143,7 @@ export class SpotifyService {
   }
 
   createAndAddPlaylist(name: string, userId: string, idList: any[]) {
-    this.createPlaylist(name, userId).subscribe((data: any) => {
-      console.log(data);
-      this.addSongsToPlayList(data.id, idList).subscribe((data: any) => {
-        console.log(data);
-      }, error => {
-        error.status == 401 && (this.tokenRefreshURL());
-      });;
-    }, error => {
-      error.status == 401 && (this.tokenRefreshURL());
-    });;
+    return this.createPlaylist(name, userId);
   }
 
 }

@@ -33,14 +33,14 @@ export class PlayListComponent implements OnInit {
   mapOfArtist = new Map<String, any>();
 
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
-  
-  
+
+
   ngOnInit() {
-   this.displayedColumns = ['name', 'artist', 'release_date'];
-   this.getSavedTracks();
+    this.displayedColumns = ['name', 'artist', 'release_date'];
+    this.getSavedTracks();
   }
 
-  getSavedTracks(){
+  getSavedTracks() {
     let receivedSongs = [];
     this.loading = true;
     this._spotifyService.getSavedTracks(this.offSet).subscribe((data: any) => {
@@ -50,10 +50,10 @@ export class PlayListComponent implements OnInit {
         this.listOfSongs.push(element.track);
       });
       receivedSongs = data.items;
-        this.loading = false;
-        this.dataSource = new MatTableDataSource(this.listOfSongs);
-        this.dataSource.paginator = this.paginator;
-/*         this.getArtists(); */
+      this.loading = false;
+      this.dataSource = new MatTableDataSource(this.listOfSongs);
+      this.dataSource.paginator = this.paginator;
+      /*         this.getArtists(); */
       if (receivedSongs.length != 0) {
         this.offSet += 50;
         this.getSavedTracks();
@@ -69,7 +69,7 @@ export class PlayListComponent implements OnInit {
   }
   onRowClicked(row) {
     console.log('Row clicked: ', row);
-    if(this.alternativeList.indexOf(row) < 0){
+    if (this.alternativeList.indexOf(row) < 0) {
       this.alternativeList.push(row);
     } else {
       let posOfSong = this.alternativeList.findIndex(element => element.id == row.id);
@@ -79,20 +79,20 @@ export class PlayListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  filterSearch(){
+  filterSearch() {
     this.filteredSongs = this.listOfSongs;
-    if(this.artist){
+    if (this.artist) {
       this.filteredSongs = this.listOfSongs.filter((song) => song.artists.find(artista => artista.name.toLowerCase().indexOf(this.artist.toLocaleLowerCase()) !== -1));
     }
-    if(this.songName){
+    if (this.songName) {
       this.filteredSongs = this.filteredSongs.filter((song) => song.name.toLowerCase().indexOf(this.songName.toLocaleLowerCase()) !== -1);
     }
     this.dataSource = new MatTableDataSource(this.filteredSongs);
     this.dataSource.paginator = this.paginator;
-    
+
   }
 
-  clear(){
+  clear() {
     this.artist = '';
     this.songName = '';
     this.playlistName = '';
@@ -100,12 +100,31 @@ export class PlayListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  createList(){
+  createList() {
+    if (this.playlistName === "") {
+      console.log("error");
+      return;
+    }
     let idList = [];
     this.alternativeList.forEach(element => {
       idList.push(element.uri);
     });
-    this._spotifyService.createAndAddPlaylist(this.playlistName, this._spotifyService.user.id, idList);
+    this.loading = true;
+    this._spotifyService.createAndAddPlaylist(this.playlistName, this._spotifyService.user.id, idList).subscribe((data: any) => {
+      console.log(data);
+      if (idList.length !== 0) {
+        this._spotifyService.addSongsToPlayList(data.id, idList).subscribe((data2: any) => {
+          console.log(data2);
+          this.loading = false;
+        }, error => {
+          error.status == 401 && (this._spotifyService.tokenRefreshURL());
+        });
+      } else {
+        this.loading = false;
+      }
+    }, error => {
+      error.status == 401 && (this._spotifyService.tokenRefreshURL());
+    });
   }
   /* getArtists(){
     let counter = 0;
