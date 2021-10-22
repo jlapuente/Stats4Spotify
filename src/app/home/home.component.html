@@ -5,12 +5,11 @@
     <div class="container premium-promo">
       <div class="row flex-row">
         <div class="col-xs-12 col-md-4 hero-intro">
-          <small>Escuchados recientemente</small>
-          <h1 class="display-2 premium-display-2" style="font-size: 48px;">Sumérgete de nuevo</h1>
-          <h3>Recupera lo que estabas escuchando, justo donde lo dejaste.</h3>
+          <small>{{ 'WELCOME.RECENTLY_LISTENED' | translate }}</small>
+          <h1 class="display-2 premium-display-2" style="font-size: 48px;">{{ 'WELCOME.WELCOME_BACK' | translate }}</h1>
+          <h3>{{ 'WELCOME.BACK_TO_LAST_LISTENED' | translate }}</h3>
           <a id="seg-hp-open-player" class="btn btn-lg btn-green btn-cta" role="button"
-            href="https://open.spotify.com/browse">Abrir el
-            reproductor web</a>
+            href="https://open.spotify.com/browse"> {{ 'WELCOME.OPEN_WEB_NAV' | translate }}</a>
         </div>
         <div class="col-xs-12 col-md-8">
           <div class="row" style="display: unset; flex-wrap: unset;">
@@ -41,7 +40,7 @@
                     <h2 (click)="redirect(artist.external_urls)">{{artist.name}}</h2>
                     <!-- <h4 (click)="redirect(artist.external_urls)">{{artist.name}}</h4> -->
                     <div id="segmented-play-now" class="btn btn-link" role="button">
-                      <a href="artist.external_urls" (click)="redirect(artist.external_urls)">ESCUCHAR YA</a>
+                      <a href="artist.external_urls" (click)="redirect(artist.external_urls)"> {{ 'WELCOME.LISTEN_NOW' | translate }} </a>
                     </div>
                   </figcaption>
                 </li>

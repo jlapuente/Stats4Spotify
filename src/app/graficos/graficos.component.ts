@@ -8,7 +8,7 @@ declare var $:any;
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.component.html',
-  styleUrls: ['./graficos.component.css']
+  styleUrls: ['./graficos.component.scss']
 })
 
 

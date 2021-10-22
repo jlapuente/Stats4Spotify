@@ -2,6 +2,8 @@ import { Component, Inject, OnInit} from '@angular/core';
 import { SpotifyService } from '../integration/services/spotify.service';
 import { CONSTANTS, SelectOption } from '../properties/constants';
 import { DOCUMENT } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,12 @@ export class HomeComponent implements OnInit {
   songList: any[];
   matriz: any[] = [];
 
-  constructor(private _spotifyService: SpotifyService, @Inject(DOCUMENT) private document: Document) {
+  langSession;
+  selectedLanguage;
+  selectedItem;
+  languages: any[];
+
+  constructor(private _spotifyService: SpotifyService, @Inject(DOCUMENT) private document: Document, private translate: TranslateService) {
 
     if (this._spotifyService.checkTokenSpo()) {
 
@@ -42,6 +49,29 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(){
-
+    this.languages = [
+      {value: 'en', label: 'uk'},
+      {value: 'es', label: 'spain'},
+    ]
+    this.langSession = sessionStorage.getItem("lang");
+    if(this.langSession){
+      this.selectedLanguage = this.langSession;
+      this.translate.use(this.langSession);
+    } else {
+      this.selectedLanguage = this.getLang();
+      this.changeLanguage();
+    }
+    console.log(this.langSession);
   }
+
+  changeLanguage(){
+    this.translate.use(this.selectedLanguage);
+    sessionStorage.setItem("lang", this.selectedLanguage);
+  }
+
+  getLang() {
+  if (navigator.languages != undefined)
+    return navigator.languages[0];
+  return navigator.language;
+}
 }

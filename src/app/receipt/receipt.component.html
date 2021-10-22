@@ -1,128 +1,130 @@
-<div class="row">
-  <div class="col-sm-12 col-md-2">
-    <div class="filterContainer">
-      <mat-form-field  class="mat-filter"  appearance="outline">
-        <mat-label>Period</mat-label>
-        <mat-select (selectionChange)="updateSearch()" [(value)]="selectedOption">
-          <mat-option></mat-option>
-          <mat-option [value]="option.value" *ngFor="let option of selectOptions">{{ option.viewValue }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="mat-filter" appearance="outline">
-        <mat-label>Period</mat-label>
-        <mat-select (selectionChange)="updateSearch()" [(value)]="selectedSearch">
-          <mat-option></mat-option>
-          <mat-option [value]="option.value" *ngFor="let option of searchList">{{ option.viewValue }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-raised-button class="mat-filter" color="primary" (click)="downloadImage()">Download Receipt</button>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-2">
+      <div class="filterContainer">
+        <mat-form-field class="mat-filter" appearance="outline">
+          <mat-label>Period</mat-label>
+          <mat-select (selectionChange)="updateSearch()" [(value)]="selectedOption">
+            <mat-option></mat-option>
+            <mat-option [value]="option.value" *ngFor="let option of selectOptions">{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mat-filter" appearance="outline">
+          <mat-label>Period</mat-label>
+          <mat-select (selectionChange)="updateSearch()" [(value)]="selectedSearch">
+            <mat-option></mat-option>
+            <mat-option [value]="option.value" *ngFor="let option of searchList">{{ option.viewValue }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="mat-filter" color="primary" (click)="downloadImage()">Download Receipt</button>
+      </div>
     </div>
-  </div>
-  <div class="col-sm-12 col-md-8">
-    <div class="receiptContainerDiv">
-      <div id="receipt">
-        <div id="receiptContainer" class="receiptContainer">
-          <h2 class="logo">
-            Stats4Spotify
-          </h2>
-          <p class="period">
-           <b>{{period}} DATA</b>
-          </p>
-          <p class="date">
-            ORDER #0001 - {{date | date:'dd/MM/yy'}}
-          </p>
-          <p class="date">
-            MOST LISTENED {{selectedSearch}} OF {{username}}
-          </p>
-          <table class="tracks">
-            <thead>
-              <tr>
-                <td class="begin">
-                  TOP
-                </td>
-                <td>
-                  <span *ngIf="isArtist">
-                    NAME
-                  </span>
-                  <span *ngIf="!isArtist">
-                    SONG
-                  </span>
-                </td>
-                <td class="length">
-                  <span *ngIf="isArtist">
-                    
-                  </span>
-                  <span *ngIf="!isArtist">
-                    TIME
-                  </span>
-                </td>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let item of items; let i = index">
-                <td class="begin">
-                  {{i+1}}
-                </td>
-                <td class="name">
-                  <span *ngIf="item.type == 'artist'">
-                    {{item.name | characterSanitizer}}
-                  </span>
-                  <span *ngIf="item.type != 'artist'">
-                    {{item.name | characterSanitizer}}
-                    <span *ngFor="let artist of item.artists">
-                      - {{artist.name | characterSanitizer}}
-                    </span>
-                  </span>
-                </td>
-                <span *ngIf="item.type != 'artist'">
-                  <td class="length">
-                    {{item.duration_ms | date:'mm:ss'}}
-                  </td>
-                </span>
-              </tr>
-
-              <tr class="total-counts">
-                <td class="begin" colspan="2">
-                  ITEM COUNT:
-                </td>
-                <td class="length">
-                  10
-                </td>
-              </tr>
-              <tr class="total-counts-end">
-                <td class="begin" colspan="2">
-                  TOTAL:
-                </td>
-                <td class="length">
-                  {{totalTime | date:'mm:ss'}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="date">
-            <!-- CARD #: **** **** **** {{year}} -->
-          </p>
-          <p class="date">
-            MEMBERSHIP: {{membership}}
-          </p>
-          <p class="date">
-            CARDHOLDER: {{username}}
-          </p>
-          <div class="thanks">
-            <p>
-              THANK YOU FOR VISITING!
-              <span class="website">
-                {{url}}
-              </span>
+    <div class="col-sm-12 col-md-8">
+      <div class="receiptContainerDiv">
+        <div id="receipt">
+          <div id="receiptContainer" class="receiptContainer">
+            <h2 class="logo">
+              Stats4Spotify
+            </h2>
+            <p class="period">
+              <b>{{period}} DATA</b>
             </p>
-            <!-- <img src="./assets/barcode.png"> -->
+            <p class="date">
+              ORDER #0001 - {{date | date:'dd/MM/yy'}}
+            </p>
+            <p class="date">
+              MOST LISTENED {{selectedSearch}} OF {{username}}
+            </p>
+            <table class="tracks">
+              <thead>
+                <tr>
+                  <td class="begin">
+                    TOP
+                  </td>
+                  <td>
+                    <span *ngIf="isArtist">
+                      NAME
+                    </span>
+                    <span *ngIf="!isArtist">
+                      SONG
+                    </span>
+                  </td>
+                  <td class="length">
+                    <span *ngIf="isArtist">
+
+                    </span>
+                    <span *ngIf="!isArtist">
+                      TIME
+                    </span>
+                  </td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of items; let i = index">
+                  <td class="begin">
+                    {{i+1}}
+                  </td>
+                  <td class="name">
+                    <span *ngIf="item.type == 'artist'">
+                      {{item.name | characterSanitizer}}
+                    </span>
+                    <span *ngIf="item.type != 'artist'">
+                      {{item.name | characterSanitizer}}
+                      <span *ngFor="let artist of item.artists">
+                        - {{artist.name | characterSanitizer}}
+                      </span>
+                    </span>
+                  </td>
+                  <span *ngIf="item.type != 'artist'">
+                    <td class="length">
+                      {{item.duration_ms | date:'mm:ss'}}
+                    </td>
+                  </span>
+                </tr>
+
+                <tr class="total-counts">
+                  <td class="begin" colspan="2">
+                    ITEM COUNT:
+                  </td>
+                  <td class="length">
+                    10
+                  </td>
+                </tr>
+                <tr class="total-counts-end">
+                  <td class="begin" colspan="2">
+                    TOTAL:
+                  </td>
+                  <td class="length">
+                    {{totalTime | date:'mm:ss'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="date">
+              <!-- CARD #: **** **** **** {{year}} -->
+            </p>
+            <p class="date">
+              MEMBERSHIP: {{membership}}
+            </p>
+            <p class="date">
+              CARDHOLDER: {{username}}
+            </p>
+            <div class="thanks">
+              <p>
+                THANK YOU FOR VISITING!
+                <span class="website">
+                  {{url}}
+                </span>
+              </p>
+              <!-- <img src="./assets/barcode.png"> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-sm-0 col-md-2">
+    </div>
   </div>
-  <div class="col-sm-0 col-md-2">
-  </div>
-
 </div>

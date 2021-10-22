@@ -33,6 +33,14 @@ export class SpotifyService {
 
   upDateToken() {
     this.credentials.accessToken = sessionStorage.getItem('token') || '';
+    if(this.user == undefined){
+      this.getCurrentUser().subscribe((data:any) => {
+        this.user = data;
+        console.log(data)
+      }, error => {
+        error.status == 401 && (this.tokenRefreshURL());
+      })
+    }
   }
 
   getInfo(query: string) {
@@ -129,6 +137,9 @@ export class SpotifyService {
 
   getCurrentUser() {
     return this.getInfo(`me`);
+  }
+  getTrack(id) {
+    return this.getInfo(`tracks/`+id);
   }
 
   createAndAddPlaylist(name: string, userId: string, idList: any[]) {

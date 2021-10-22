@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { GraficosComponent } from './graficos/graficos.component';
 import { AccessTokenComponent } from './integration/access-token/access-token.component'
@@ -20,6 +20,26 @@ import { CharacterSanitizerPipe } from './integration/pipes/character-sanitizer.
 import { ComparationComponent } from './comparation/comparation.component';
 import { PlayListComponent } from './play-list/play-list.component'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ArtistSanitizerPipe } from './integration/pipes/artist-sanitizer.pipe';
+ import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}
+
+const EXTERNAL_MODULES = [  
+  TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    },
+    defaultLanguage: 'es',
+    useDefaultLang: true
+  })
+]
 
 @NgModule({
   declarations: [
@@ -34,7 +54,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MsToSecondsPipe,
     CharacterSanitizerPipe,
     ComparationComponent,
-    PlayListComponent
+    PlayListComponent,
+    ArtistSanitizerPipe
   ],
   imports: [
     BrowserModule,
@@ -58,9 +79,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FontAwesomeModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ...EXTERNAL_MODULES
   ],
-  providers: [],
+  providers: [{provide: LOCALE_ID, useValue: 'es-ES'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

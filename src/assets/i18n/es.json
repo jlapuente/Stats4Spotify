@@ -1,0 +1,10 @@
+{
+  "WELCOME": {
+    "RECENTLY_LISTENED" : "Escuchados recientemente",
+    "WELCOME_BACK": "Sumérgete de nuevo",
+    "BACK_TO_LAST_LISTENED" : "Recupera lo que estabas escuchando, justo donde lo dejaste",
+    "OPEN_WEB_NAV" : "Abrir el reproductor web",
+    "LISTEN_NOW": "ESCUCHAR YA"
+  },
+  "USERNAME": "Usuario"
+}
