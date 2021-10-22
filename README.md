@@ -11,6 +11,6 @@ For publishing it in github-pages just run `ng deploy --base-href=https://jlapue
 ## Credits
 
 The idea of the project was made on a previous project `https://spotify-stats-tracker.vercel.app/#/` that i made in order to learn the Spotify Api.
-Then when i made some improvementes to my own code i decided to re-start the project to maintain a optimized and clean code.
+Then when i made some improvements to my own code i decided to re-start the project to maintain a optimized and clean code.
 When adding some new funcionalities i found Receiptify, a page that made receipts with the most played songs of the loged users, i remade the functionality on my own and added on my app.
 I added some personalization and some new options like the possibility of making one receipt with the most listened artist of the user.
