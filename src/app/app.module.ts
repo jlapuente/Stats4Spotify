@@ -84,7 +84,7 @@ const EXTERNAL_MODULES = [
     MatInputModule,
     ...EXTERNAL_MODULES
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es-ES'}],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
