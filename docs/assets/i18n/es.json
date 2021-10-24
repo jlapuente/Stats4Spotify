@@ -6,5 +6,33 @@
     "OPEN_WEB_NAV" : "Abrir el reproductor web",
     "LISTEN_NOW": "ESCUCHAR YA"
   },
-  "USERNAME": "Usuario"
+  "USERNAME": "Usuario",
+  "GRAPHS": {
+    "MOST_LISTENED_ARTISTS" : "Artistas mas frecuentes",
+    "MOST_LISTENED_GENRES" : "Géneros mas escuchados",
+    "GRAPH_INFO" : "Información de la Gráfica",
+    "GENRES_DESC" : "Esta gráfica muestra los géneros mas repetidos entre tus cincuenta artistas mas escuchados. Este dato se toma de los artistas y no de las canciones por como Spotify almacena los datos, por lo tanto, no es 100% preciso, ya que un artista puede tener una mayoria de canciones de un mismo género y una minoria de otro distinto.",
+    "ARTISTS_DESC": "Esta gráfica muestra los artistas de tu biblioteca de los que mas canciones tienes guardadas. El número que se muestra en la gráfica es la cantidad de canciones que tienes guardadas en <u>'Canciones que te gustan'</u> "
+  },
+  "RECEIPT": {
+    "PERIOD": "Periodo",
+    "TYPE": "Tipo de busqueda",
+    "MOST_LISTENED": "{{param}} mas escuchados de {{otherparam}}",
+    "TOP": "TOP",
+    "NAME": "Nombre",
+    "SONG": "Cancion",
+    "TIME": "Duracion",
+    "ITEM_COUNT": "Cantidad de elementos:",
+    "MEMBERSHIP": "Tipo de Cuenta",
+    "CARDHOLDER": "Usuario",
+    "THANKS": "¡Gracias por visita!",
+    "TOTAL": "Duracion total",
+    "ORDER": "Pedido",
+    "ARTIST": "Artistas",
+    "SONGS": "Canciones",
+    "LAST_MONTH": "Ultimo mes",
+    "LAST_SIX_MONTHS": "Ultimos seis meses",
+    "FROM_THE_BEGINNING": "Desde el comienzo",
+    "DOWNLOAD": "Descargar"
+  }
 }
