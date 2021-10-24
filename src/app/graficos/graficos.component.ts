@@ -3,7 +3,8 @@ import { Chart } from '../../../node_modules/chart.js'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { SpotifyService } from '../integration/services/spotify.service.js';
 import { CONSTANTS } from '../properties/constants.js';
-declare var $:any;
+import { TranslateService } from '@ngx-translate/core';
+declare var $: any;
 
 @Component({
   selector: 'app-graficos',
@@ -11,24 +12,22 @@ declare var $:any;
   styleUrls: ['./graficos.component.scss']
 })
 
-
 export class GraficosComponent implements OnInit {
 
-  constructor(private _spotifyService: SpotifyService) { }
+  constructor(private _spotifyService: SpotifyService, private translate: TranslateService) { }
+
   genreGraph: object;
   listaArtistas: any[] = [];
   listaGeneros: Grafica[] = [];
   listaValores = [];
-  listaCanciones = []; 
+  listaCanciones = [];
   listaSongs = []
   offSet = 0;
   faInfoCircle = faInfoCircle;
   $: any;
 
-
-  explicacionGraficaGeneros = "Esta gráfica muestra los géneros mas repetidos entre tus cincuenta artistas mas escuchados. Este dato se toma de los artistas y no de las canciones por como Spotify almacena los datos, por lo tanto, no es 100% preciso, ya que un artista puede tener una mayoria de canciones de un mismo género y una minoria de otro distinto."
-  explicacionGraficaArtistas = "Esta gráfica muestra los artistas de tu biblioteca de los que mas canciones tienes guardadas. El número que se muestra en la gráfica es la cantidad de canciones que tienes guardadas en <u>'Canciones que te gustan'</u> "
-  // itemGeneros: object = { 'label' : string, 'value' : number };
+  explicacionGraficaGeneros;
+  explicacionGraficaArtistas;
 
   colors: string[] = [
     'rgba(255, 173, 173, 0.6)',
@@ -43,27 +42,31 @@ export class GraficosComponent implements OnInit {
   borderColors: string[] = [
     'rgba(255, 198, 255, 1)',
   ]
-  ngOnInit() {
 
+  ngOnInit() {
     // Inicializamos los tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
     this.getArtists();
-    
-    let offSet = 0;
     this.getSavedTracks();
+
+    this.translate.get('HELLO').subscribe((res: string) => {
+      this.explicacionGraficaGeneros = res;
+    });
+    this.translate.get('HELLO').subscribe((res: string) => {
+      this.explicacionGraficaArtistas = res;
+    });
+
   }
 
-  
-  getSavedTracks(){
+
+  getSavedTracks() {
     this._spotifyService.getSavedTracks(this.offSet).subscribe((data: any) => {
-      console.log(data);
-      // this.listaCanciones.push(data.items)
       data.items.forEach(element => {
         this.listaCanciones.push(element);
       });
       this.listaSongs = data.items;
-      if(this.listaSongs.length != 0){
+      if (this.listaSongs.length != 0) {
         this.offSet += 50;
         this.getSavedTracks();
       } else {
@@ -71,31 +74,28 @@ export class GraficosComponent implements OnInit {
       }
     }, error => {
       error.status == 401 || error.status == 400 && (this._spotifyService.tokenRefreshURL());
-    }, () => {
     });
   }
 
-  groupSongs(){
+  groupSongs() {
     let mapOfArtist = new Map;
     this.listaCanciones.forEach(item => {
       item.track.artists.forEach(artista => {
         mapOfArtist.set(artista.name, mapOfArtist.has(artista.name) ? mapOfArtist.get(artista.name) + 1 : 1);
       });
     });
-    this.listaCanciones =[];
+    this.listaCanciones = [];
     this.listaCanciones = this.mapToSortedArray(mapOfArtist, this.listaCanciones);
     let labels = [];
-      let values = [];
-      this.listaCanciones.forEach(element => {
-        labels.push(element.label);
-        values.push(element.value);
-      })
+    let values = [];
+    this.listaCanciones.forEach(element => {
+      labels.push(element.label);
+      values.push(element.value);
+    })
     this.generateGenreGraph(labels, values, 'artist');
   }
 
-
   generateGenreGraph(labels, values, graph) {
-
     var canvas: any = document.getElementById(graph);
     var ctx = canvas.getContext('2d');
     this.genreGraph = new Chart(ctx, {
@@ -110,15 +110,10 @@ export class GraficosComponent implements OnInit {
           borderWidth: 1
         }]
       },
-      // options: {
-      //   chartArea: {
-      //     backgroundColor: 'rgba(255, 255, 252, 1)'
-      //   },
-      // }
     });
   }
+
   getArtists() {
-    // this.loading = true;
     let myhash = new Map;
     this._spotifyService.getTopArtist("long_term", CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
       this.listaArtistas = data.items;
@@ -141,10 +136,9 @@ export class GraficosComponent implements OnInit {
     }, error => {
       error.status == 401 || error.status == 400 && (this._spotifyService.tokenRefreshURL());
     });
-
-
   }
-  mapToSortedArray(map, list){
+
+  mapToSortedArray(map, list) {
     map.forEach((value: number, key: string) => {
       let graph = new Grafica;
       graph.label = key;
@@ -155,21 +149,22 @@ export class GraficosComponent implements OnInit {
     list = list.splice(0, 8);
     return list;
   }
+
   compare(a, b) {
-    if ( a.value > b.value ){
+    if (a.value > b.value) {
       return -1;
     }
-    if ( a.value < b.value ){
+    if (a.value < b.value) {
       return 1;
     }
     return 0;
   }
 
-  openModal(text : string){
+  openModal(text: string) {
     $('.modal-body>p').html(text);
     $('#myModal').modal('toggle');
   }
-  
+
 }
 export class Grafica {
   label: string;
