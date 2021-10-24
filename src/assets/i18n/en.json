@@ -1,4 +1,38 @@
 {
-  "HI": "Hello",
-  "USERNAME": "Usuario"
+  "WELCOME": {
+    "RECENTLY_LISTENED": "Recently listened",
+    "WELCOME_BACK": "Immerse yourself",
+    "BACK_TO_LAST_LISTENED": "Take back what you were listening to, right where you left it",
+    "OPEN_WEB_NAV": "Open the web player",
+    "LISTEN_NOW": "LISTEN NOW"
+  },
+  "USERNAME": "User",
+  "GRAPHS": {
+    "MOST_LISTENED_ARTISTS": "Most listened artists",
+    "MOST_LISTENED_GENRES": "Most listened genres",
+    "GRAPH_INFO": "Graph description",
+    "GENRES_DESC": "This graph shows the most repeated genres among your fifty most listened to artists. This data is taken from the artists and not from the songs because of how Spotify stores the data, therefore, it is not 100% accurate, since an artist can have a majority of songs of the same genre and a minority of a different one.",
+    "ARTISTS_DESC": "This graph shows the artists in your library from which the most songs you have saved. The number shown in the graph is the number of songs you have saved in <u>'Liked songs'</u> "
+  },
+  "RECEIPT": {
+    "PERIOD": "Period",
+    "TYPE": "Search type",
+    "MOST_LISTENED": "Most listened {{param}} of {{otherparam}}",
+    "TOP": "TOP",
+    "NAME": "Name",
+    "SONG": "Song",
+    "TIME": "Length",
+    "ITEM_COUNT": "Item count:",
+    "MEMBERSHIP": "Membership",
+    "CARDHOLDER": "Username",
+    "THANKS": "Thanks for visiting!",
+    "TOTAL": "Total length",
+    "ORDER": "Order",
+    "ARTIST": "Artists",
+    "SONGS": "Songs",
+    "LAST_MONTH": "Last Month",
+    "LAST_SIX_MONTHS": "Last six Months",
+    "FROM_THE_BEGINNING": "From the beginning",
+    "DOWNLOAD": "Download"
+  }
 }

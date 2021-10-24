@@ -50,15 +50,13 @@ export class GraficosComponent implements OnInit {
     this.getArtists();
     this.getSavedTracks();
 
-    this.translate.get('HELLO').subscribe((res: string) => {
+    this.translate.get('GRAPHS.GENRES_DESC').subscribe((res: string) => {
       this.explicacionGraficaGeneros = res;
     });
-    this.translate.get('HELLO').subscribe((res: string) => {
+    this.translate.get('GRAPHS.ARTISTS_DESC').subscribe((res: string) => {
       this.explicacionGraficaArtistas = res;
     });
-
   }
-
 
   getSavedTracks() {
     this._spotifyService.getSavedTracks(this.offSet).subscribe((data: any) => {
