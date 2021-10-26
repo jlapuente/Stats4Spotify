@@ -57,6 +57,11 @@ MIT
 @angular/core
 MIT
 
+@angular/fire
+MIT
+
+@angular/fire/firestore
+
 @angular/forms
 MIT
 
@@ -117,6 +122,18 @@ MIT
 
 @angular/router
 MIT
+
+@firebase/app
+Apache-2.0
+
+@firebase/component
+Apache-2.0
+
+@firebase/logger
+Apache-2.0
+
+@firebase/util
+Apache-2.0
 
 @fortawesome/angular-fontawesome
 MIT
@@ -317,6 +334,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   [1]: http://eligrey.com
 
+
+firebase/app
 
 hammerjs
 MIT

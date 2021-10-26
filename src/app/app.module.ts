@@ -24,6 +24,11 @@ import { ArtistSanitizerPipe } from './integration/pipes/artist-sanitizer.pipe';
  import {MatFormFieldModule} from '@angular/material/form-field'; 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+
 
 export function HttpLoaderFactory(http: HttpClient){
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -82,9 +87,10 @@ const EXTERNAL_MODULES = [
     MatSortModule,
     MatFormFieldModule,
     MatInputModule,
-    ...EXTERNAL_MODULES
+    ...EXTERNAL_MODULES,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
