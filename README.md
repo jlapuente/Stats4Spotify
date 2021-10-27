@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-For publishing it in github-pages just run `ng deploy --base-href=https://jlapuente.github.io/Stats4Spotify/`
+For publishing it in github-pages just run `ng build --prod --deploy-url=https://jlapuente.github.io/Stats4Spotify/ --base-href=https://jlapuente.github.io/Stats4Spotify/`
 
 ## Credits
 
