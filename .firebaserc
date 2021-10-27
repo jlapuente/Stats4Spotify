@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cats-95353": {
+      "hosting": {
+        "Stats4Spotify": [
+          "cats-95353"
+        ]
+      }
+    }
+  }
+}
