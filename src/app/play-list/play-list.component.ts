@@ -36,7 +36,7 @@ export class PlayListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.displayedColumns = ['name', 'artist', 'release_date'];
+    this.displayedColumns = ['name', 'artist', 'release_date', 'duration_ms'];
     this.getSavedTracks();
   }
 

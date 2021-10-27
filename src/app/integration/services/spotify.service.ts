@@ -13,7 +13,7 @@ export class SpotifyService {
     clientId: SECRET_CONSTANTS.client_id,
     clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: SECRET_CONSTANTS.redirect_uri_pro
+    redirect_uri: SECRET_CONSTANTS.redirect_uri
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
 
@@ -50,7 +50,7 @@ export class SpotifyService {
               console.log('Usuario creado exitósamente!');
             }, (error) => {
               console.error(error);
-            });;
+            });
           } else {
             console.log(data[0].user);
           }
@@ -165,4 +165,13 @@ export class SpotifyService {
     return this.createPlaylist(name, userId);
   }
 
+  createFullPlayList(name: string, userId: string, idList: any[]) {
+   this.createPlaylist(name, userId).subscribe((data:any) => {
+     this.addSongsToPlayList(data.id, idList).subscribe(data2 => {
+       return data2;
+     });
+   }, error => {
+     return error;
+   }) 
+  }
 }

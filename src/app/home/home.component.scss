@@ -105,6 +105,7 @@ a.showOnFocus:focus {
 
 .album-results li {
   list-style-type: none;
+  margin-top: 4%;
 }
 
 @media (max-width: 767px) {
@@ -115,7 +116,8 @@ a.showOnFocus:focus {
     width: 55%;
     min-height: 1;
     position: relative;
-    padding-top: 12px;
+    padding-top: 6px;
+    margin-top: 0;
   }
 }
 

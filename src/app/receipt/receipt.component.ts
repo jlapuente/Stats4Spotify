@@ -68,8 +68,12 @@ export class ReceiptComponent implements OnInit {
           error.status == 401 && (this._spotifyService.tokenRefreshURL());
         });
       } else {
-        this._spotifyService.getTopTracks2(this.selectedOption.value, CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
-          this.items = data.items;
+        this._spotifyService.getTopTracks2(this.selectedOption.value, CONSTANTS.TEN).subscribe((data: any) => {
+          console.log(data.items);
+          /* data.items.forEach(element => {
+            console.log(element.name);
+          });
+          this.items = data.items.splice(0, 10); */
           this.totalTime = 0;
           this.totalTime = this.items.reduce((sum, current) => sum + current.duration_ms, 0);
           // this.loading = false;

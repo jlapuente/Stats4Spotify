@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row" style="margin-top: 4%;">
+    <div class="col-sm-12 col-md-12">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+          <!-- Weight Column -->
+          <ng-container matColumnDef="index">
+            <th mat-header-cell *matHeaderCellDef> Index </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              {{(i+1) + (paginator.pageIndex*paginator.pageSize)}}
+            </td>
+          </ng-container>
+          
+          <!-- Weight Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="artist">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Artista </th>
+            <td mat-cell *matCellDef="let element">
+              {{element.artists[0]?.name}} {{element.artists[1]?.name}} 
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="release_date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Release Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.album?.release_date | date:'dd/MM/yyyy'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="duration_ms">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let element"> {{element.duration_ms | date:'mm:ss'}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons
+          aria-label="Select page of periodic elements"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="loading-spinner" *ngIf="loading">
+  <img src="../../assets/Spinner-1s-200px.svg" style="margin: auto; display: block;">
+</div>

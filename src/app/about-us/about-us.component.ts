@@ -26,7 +26,7 @@ export class AboutUsComponent implements OnInit {
   gitHubApi: string = 'https://api.github.com/repos/jlapuente/Stats4Spotify/commits';
   commitList: Commit[] = [];
   displayedColumns: string[] = [];
-  screenWidth: number = window.screen.height;
+  screenWidth: number = window.screen.width;
   isMobile: boolean = this.screenWidth < 768 ? true : false;
   parameters: HttpParams = new HttpParams();
   dataSource;

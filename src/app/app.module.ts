@@ -27,6 +27,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HistorialComponent } from './historial/historial.component';
 
 
 
@@ -60,7 +61,8 @@ const EXTERNAL_MODULES = [
     CharacterSanitizerPipe,
     ComparationComponent,
     PlayListComponent,
-    ArtistSanitizerPipe
+    ArtistSanitizerPipe,
+    HistorialComponent
   ],
   imports: [
     BrowserModule,

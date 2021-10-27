@@ -5,6 +5,7 @@ export class CONSTANTS {
   static readonly SINGLE_ESCALE = 1;
   static readonly TEN_ESCALE = 10;
   static readonly TWELVE_ESCALE = 12;
+  static readonly TWENTY_ESCALE = 20;
   static readonly FIVE_ESCALE = 5;
   static readonly SIX_ESCALE = 6;
   static readonly assetsFolder: string = 'src/assets';
