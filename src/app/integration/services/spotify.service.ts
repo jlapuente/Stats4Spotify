@@ -25,11 +25,13 @@ export class SpotifyService {
       '&redirect_uri=' + encodeURIComponent(this.credentials.redirect_uri),
     refreshaAcessToken: 'https://accounts.spotify.com/api/token'
   };
-  user: any;
+  user: any = null;
   songs = [];
 
   constructor(private _httpClient: HttpClient, private _fireStoreService: FirestoreService) {
-    this.upDateToken()
+    if(sessionStorage.getItem('user') == null || this.user == null){
+      this.upDateToken()
+    }
   }
 
   upDateToken() {
@@ -37,8 +39,9 @@ export class SpotifyService {
     if (this.user == undefined) {
       this.getCurrentUser().subscribe((data: any) => {
         this.user = data;
+        sessionStorage.setItem('user', this.user);
+
         let fireBaseData = { 'id': this.user.id, 'data': this.user };
-        console.log(this.user.id);
         this._fireStoreService.getUser(this.user.id).pipe(map(list => {
           return list.map(item => {
             return { id: item.payload.doc.id, user: item.payload.doc.data() }
@@ -86,6 +89,7 @@ export class SpotifyService {
     this.checkTokenSpo() && alert('Expiro la sesión');
     this.credentials.accessToken = '';
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     this.checkTokenSpoLogin();
 
   }

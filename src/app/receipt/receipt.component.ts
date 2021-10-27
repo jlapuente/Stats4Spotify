@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SpotifyService } from '../integration/services/spotify.service';
 import { CONSTANTS, SelectOption } from '../properties/constants';
 import html2canvas from 'html2canvas';
 import { saveAs } from '../../../node_modules/file-saver';
 import { TranslateService } from '@ngx-translate/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-receipt',
@@ -28,6 +29,17 @@ export class ReceiptComponent implements OnInit {
   totalTime: number;
 
   isArtist: boolean = true;
+  
+  receipt = true;
+  listOfSongs : any[] = [];
+  idList = [];
+  screenWidth: number = window.screen.width;
+  isMobile: boolean = this.screenWidth < 768 ? true : false;
+  @ViewChild(MatPaginator, null) paginator: MatPaginator;
+  @ViewChild(MatSort, null) sort: MatSort;
+  displayedColumns = [];
+  dataSource;
+  loading = false;
 
   constructor(private _spotifyService: SpotifyService, private translate: TranslateService) { }
 
@@ -39,43 +51,29 @@ export class ReceiptComponent implements OnInit {
     this.username = "";
     this.clientId = "";
     this.url = "jlapuente.github.io/Stats4Spotify/";
-    this._spotifyService.getCurrentUser().subscribe((data: any) => {
-      this.user = data;
-      this.username = this.user.display_name;
-      this.membership = this.user.product;
-      // this.loading = false;
-    }, error => {
-      error.status == 401 && (this._spotifyService.tokenRefreshURL());
-    });
+
   }
 
   updateSearch() {
     this.period = (this.selectOptions.find(i => i.value === this.selectedOption.value)).viewValue;
-    // this.selectOptions.forEach(i => {
-    //   if(i.value === this.selectedOption.value){
-    //     this.period = i.viewValue;
-    //   }
-    // })
-    console.log(this.period);
     this.isArtist = this.selectedSearch.value == this.searchList[1].value;
     if (this._spotifyService.checkTokenSpo()) {
       // this.loading = true;
       if (this.selectedSearch.value == 'artist') {
         this._spotifyService.getTopArtist(this.selectedOption.value, CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
           this.items = data.items;
+          this.membership = this._spotifyService.user.product;
+          this.username = this._spotifyService.user.display_name;
           // this.loading = false;
         }, error => {
           error.status == 401 && (this._spotifyService.tokenRefreshURL());
         });
       } else {
-        this._spotifyService.getTopTracks2(this.selectedOption.value, CONSTANTS.TEN).subscribe((data: any) => {
-          console.log(data.items);
-          /* data.items.forEach(element => {
-            console.log(element.name);
-          });
-          this.items = data.items.splice(0, 10); */
+        this._spotifyService.getTopTracks2(this.selectedOption.value, CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
           this.totalTime = 0;
           this.totalTime = this.items.reduce((sum, current) => sum + current.duration_ms, 0);
+          this.membership = this._spotifyService.user.product;
+          this.username = this._spotifyService.user.display_name;
           // this.loading = false;
         }, error => {
           error.status == 401 && (this._spotifyService.tokenRefreshURL());
@@ -128,6 +126,59 @@ export class ReceiptComponent implements OnInit {
       this.selectedSearch = this.searchList[1];
       this.updateSearch();
     });
+  }
+
+  getSavedTracks() {
+    this.loading = true;
+    this._spotifyService.getTopTracks2('long_term', 50).subscribe((data: any) => {
+      console.log(data);
+      data.items.forEach(element => {
+        this.listOfSongs.push(element)
+      });
+      console.log(this.listOfSongs);
+      this.loading = false;
+      this.dataSource = new MatTableDataSource(this.listOfSongs);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, error => {
+      error.status == 401 || error.status == 400 && (this._spotifyService.tokenRefreshURL());
+    });
+  }
+  onRowClicked(row) {
+    console.log('Row clicked: ', row);
+    this.createList();
+  }
+
+  getIds() {
+    this.idList = this.listOfSongs.map(obj => {
+      return obj.uri
+    });
+  }
+
+  createList() {
+    this.getIds();
+    console.log(this.idList);
+    this.loading = true;
+    this._spotifyService.createPlaylist('Mi top 50 canciones', this._spotifyService.user.id).subscribe((data: any) => {
+      this._spotifyService.addSongsToPlayList(data.id, this.idList).subscribe(data2 => {
+        console.log("Playlist creada y canciones añadidas");
+        this.loading = false;
+      })
+    })
+  }
+
+  changeView(){
+    this.receipt = !this.receipt;
+    if(this.receipt){
+
+    } else {
+      if (this.isMobile) {
+        this.displayedColumns = ['index', 'name', 'artist', 'duration_ms'];
+      } else {
+        this.displayedColumns = ['index', 'name', 'artist', 'release_date', 'duration_ms'];
+      }
+      this.getSavedTracks();
+    }
   }
 
 }

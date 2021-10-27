@@ -30,48 +30,30 @@ export class HistorialComponent implements OnInit {
   @ViewChild(MatSort, null) sort: MatSort;
 
   ngOnInit() {
-    console.log(this.screenWidth);
-    console.log(this.isMobile);
     if (this.isMobile) {
       this.displayedColumns = ['index', 'name', 'artist', 'duration_ms'];
     } else {
       this.displayedColumns = ['index', 'name', 'artist', 'release_date', 'duration_ms'];
     }
-    this.getSavedTracks();
-  }
+    this.getHistory();
+/*     this.getSavedTracks();
+ */  }
 
-  getSavedTracks() {
+  getHistory(){
     this.loading = true;
-    this._spotifyService.getTopTracks2('long_term', 50).subscribe((data: any) => {
+    this._spotifyService.getRecentlyPlayed().subscribe((data:any) => {
       console.log(data);
+      this.listOfSongs = [];
       data.items.forEach(element => {
-        this.listOfSongs.push(element)
+        let track = element.track;
+        track.played_at = element.played_at;
+        this.listOfSongs.push(track);
       });
       console.log(this.listOfSongs);
-      this.loading = false;
       this.dataSource = new MatTableDataSource(this.listOfSongs);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    }, error => {
-      error.status == 401 || error.status == 400 && (this._spotifyService.tokenRefreshURL());
-    });
-  }
-  onRowClicked(row) {
-    console.log('Row clicked: ', row);
-    this.createList();
-  }
-
-  getIds() {
-    this.idList = this.listOfSongs.map(obj => {
-      return obj.uri
-    });
-  }
-
-  createList(){
-    this.getIds();
-    console.log(this.idList);
-    this._spotifyService.createFullPlayList('Mi top 50 canciones', this._spotifyService.user.id, this.idList).then(data =>{
-      console.log(data);
+      this.loading = false;
     })
   }
   
