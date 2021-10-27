@@ -17,7 +17,7 @@
   "RECEIPT": {
     "PERIOD": "Period",
     "TYPE": "Search type",
-    "MOST_LISTENED": "Most listened {{param}} of {{otherparam}}",
+    "MOST_LISTENED": "{{otherparam}}'s most listened {{param}}",
     "TOP": "TOP",
     "NAME": "Name",
     "SONG": "Song",
