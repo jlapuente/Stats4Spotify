@@ -61,6 +61,7 @@ MIT
 MIT
 
 @angular/fire/firestore
+MIT
 
 @angular/forms
 MIT
@@ -129,10 +130,16 @@ Apache-2.0
 @firebase/component
 Apache-2.0
 
+@firebase/firestore
+Apache-2.0
+
 @firebase/logger
 Apache-2.0
 
 @firebase/util
+Apache-2.0
+
+@firebase/webchannel-wrapper
 Apache-2.0
 
 @fortawesome/angular-fontawesome
@@ -336,6 +343,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 firebase/app
+
+firebase/firestore
 
 hammerjs
 MIT
