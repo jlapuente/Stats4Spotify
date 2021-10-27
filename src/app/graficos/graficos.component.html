@@ -1,34 +1,38 @@
-<div class="container">
-  <div class="row graphContainer">
-    <div class="col-sm-12 col-md-6">
-      <div class="row graphTittle">
-        <span class="tittle">{{ 'GRAPHS.MOST_LISTENED_GENRES' | translate }}</span>
-        <fa-icon (click)='openModal(this.explicacionGraficaGeneros)' [icon]="faInfoCircle" data-toggle="tooltip" data-placement="left" title="{{this.explicacionGraficaGeneros}}"></fa-icon>
-      </div>
-      <canvas height="200" id="genres"></canvas>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <div class="row graphTittle">
-        <span class="tittle">{{ 'GRAPHS.MOST_LISTENED_ARTISTS' | translate }}</span> 
-        <fa-icon (click)='openModal(this.explicacionGraficaArtistas)' [icon]="faInfoCircle" data-toggle="tooltip"  data-placement="left" title="{{this.explicacionGraficaArtistas}}"></fa-icon>
-      </div>
-      <canvas height="200" id="artist"></canvas>
-    </div>
-  </div>
-</div>
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: auto;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span class="modal-title">{{ 'GRAPHS.GRAPH_INFO' | translate }}</span>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p></p>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="wrapper">
 
+  <div class="container">
+    <div class="row graphContainer">
+      <div class="col-sm-12 col-md-6">
+        <div class="row graphTittle">
+          <span class="tittle">{{ 'GRAPHS.MOST_LISTENED_GENRES' | translate }}</span>
+          <fa-icon (click)='openModal(this.explicacionGraficaGeneros)' [icon]="faInfoCircle" data-toggle="tooltip"
+            data-placement="left" title="{{this.explicacionGraficaGeneros}}"></fa-icon>
+        </div>
+        <canvas height="200" id="genres"></canvas>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="row graphTittle">
+          <span class="tittle">{{ 'GRAPHS.MOST_LISTENED_ARTISTS' | translate }}</span>
+          <fa-icon (click)='openModal(this.explicacionGraficaArtistas)' [icon]="faInfoCircle" data-toggle="tooltip"
+            data-placement="left" title="{{this.explicacionGraficaArtistas}}"></fa-icon>
+        </div>
+        <canvas height="200" id="artist"></canvas>
+      </div>
+    </div>
+  </div>
+  <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: auto;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">{{ 'GRAPHS.GRAPH_INFO' | translate }}</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
