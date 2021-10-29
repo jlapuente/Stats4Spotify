@@ -16,7 +16,9 @@
             <mat-option [value]="option" *ngFor="let option of searchList">{{ option.viewValue }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button class="mat-filter" id="download-button" color="primary" (click)="downloadImage()">{{ 'RECEIPT.DOWNLOAD' |
+        <button mat-raised-button *ngIf="receipt" class="mat-filter" id="download-button" color="primary" (click)="downloadImage()">{{ 'RECEIPT.DOWNLOAD' |
+          translate }}</button>
+        <button mat-raised-button *ngIf="!receipt" class="mat-filter" id="download-button" color="primary" (click)="createList()">{{ 'RECEIPT.CREATE' |
           translate }}</button>
         <button mat-raised-button class="mat-filter" color="primary" (click)="changeView()">Cambiar modo</button>
       </div>

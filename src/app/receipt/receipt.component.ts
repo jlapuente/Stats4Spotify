@@ -171,7 +171,6 @@ export class ReceiptComponent implements OnInit {
 
   createList() {
     this.getIds();
-    console.log(this.idList);
     this.loading = true;
     this._spotifyService.createPlaylist('Mi top 50 canciones - ' + this.selectedOption.viewValue, this._spotifyService.user.id).subscribe((data: any) => {
       this._spotifyService.addSongsToPlayList(data.id, this.idList).subscribe(() => {
@@ -182,16 +181,16 @@ export class ReceiptComponent implements OnInit {
   }
 
   changeView() {
-    var downloadButton = <HTMLInputElement>document.getElementById('download-button');
-    this.receipt = !this.receipt;
+/*     var downloadButton = <HTMLInputElement>document.getElementById('download-button');
+ */    this.receipt = !this.receipt;
     if (this.receipt) {
-      downloadButton.disabled = false;
-      if (this.items.length == 0) {
+/*       downloadButton.disabled = false;
+ */      if (this.items.length == 0) {
         this.updateSearch()
       }
     } else {
-      downloadButton.disabled = true;
-      this.getSavedTracks(false);
+/*       downloadButton.disabled = true;
+ */      this.getSavedTracks(false);
     }
   }
 
