@@ -1,25 +1,25 @@
 <mat-toolbar color="dark-background" style="height: 8vh; min-height: unset;">
   <mat-toolbar-row>
-    <button mat-icon-button>
+<!--     <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-    </button>
-    <h1>Stats for Spotify</h1>
+    </button> -->
+    <h1 [routerLink]="'/home'" >Stats for Spotify</h1>
     <span class="menu-spacer"></span>
   </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-sidenav-container style="height: 92vh;">
-  <mat-sidenav #sidenav>
+  <!-- <mat-sidenav #sidenav>
     <mat-nav-list>
       <a mat-list-item [routerLink]="'/home'"> Inicio </a>
       <a mat-list-item [routerLink]="'/receipt'"> Receipt </a>
-      <a mat-list-item [routerLink]="'/graphs'"> Gráficos </a>
+       <a mat-list-item [routerLink]="'/graphs'"> Gráficos </a> 
       <a mat-list-item [routerLink]="'/playlist'"> PlayList </a>
-      <!-- <a mat-list-item [routerLink]="'/gallery'"> Galeria </a> -->
-      <a mat-list-item [routerLink]="'/about-us'"> Histórico de Cambios </a>
-      <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a>
+       <a mat-list-item [routerLink]="'/gallery'"> Galeria </a>
+       <a mat-list-item [routerLink]="'/about-us'"> Histórico de Cambios </a>
+      <a mat-list-item (click)="sidenav.toggle()" mat-list-item>Close</a> 
     </mat-nav-list>
-  </mat-sidenav>
+  </mat-sidenav> -->
   <mat-sidenav-content>
     <div style="height: 100%;">
       <router-outlet></router-outlet>

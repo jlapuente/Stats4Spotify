@@ -5,8 +5,7 @@
         <small>{{ 'WELCOME.RECENTLY_LISTENED' | translate }}</small>
         <h1 class="display-2 premium-display-2" style="font-size: 48px;">{{ 'WELCOME.WELCOME_BACK' | translate }}</h1>
         <h3>{{ 'WELCOME.BACK_TO_LAST_LISTENED' | translate }}</h3>
-        <a mat-raised-button color="primary" id="seg-hp-open-player" role="button"
-          href="https://open.spotify.com/browse"> {{ 'WELCOME.OPEN_WEB_NAV' | translate }}</a>
+        <a mat-raised-button color="primary" id="seg-hp-open-player" role="button" [routerLink]="'/receipt'"> {{ 'WELCOME.OPEN_WEB_NAV' | translate }}</a>
       </div>
       <div class="col-xs-12 col-md-8">
         <div class="row" style="display: unset; flex-wrap: unset;">

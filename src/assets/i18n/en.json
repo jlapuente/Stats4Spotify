@@ -33,6 +33,7 @@
     "LAST_MONTH": "Last Month",
     "LAST_SIX_MONTHS": "Last six Months",
     "FROM_THE_BEGINNING": "From the beginning",
-    "DOWNLOAD": "Download"
+    "DOWNLOAD": "Download",
+    "CREATE": "Create List"
   }
 }
