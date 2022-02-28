@@ -2,7 +2,7 @@
   "WELCOME": {
     "RECENTLY_LISTENED" : "Escuchados recientemente",
     "WELCOME_BACK": "Sumérgete de nuevo",
-    "BACK_TO_LAST_LISTENED" : "Recupera lo que estabas escuchando, justo donde lo dejaste",
+    "BACK_TO_LAST_LISTENED" : "Haz click abajo para descubrir tus artistas y canciones mas escuchadas",
     "OPEN_WEB_NAV" : "Abrir el reproductor web",
     "LISTEN_NOW": "ESCUCHAR YA"
   },
@@ -17,7 +17,7 @@
   "RECEIPT": {
     "PERIOD": "Periodo",
     "TYPE": "Tipo de busqueda",
-    "MOST_LISTENED": "{{param}} mas escuchados de {{otherparam}}",
+    "MOST_LISTENED": "{{param}} mas escuchadas de {{otherparam}}",
     "TOP": "TOP",
     "NAME": "Nombre",
     "SONG": "Cancion",
@@ -33,6 +33,7 @@
     "LAST_MONTH": "Ultimo mes",
     "LAST_SIX_MONTHS": "Ultimos seis meses",
     "FROM_THE_BEGINNING": "Desde el comienzo",
-    "DOWNLOAD": "Descargar"
+    "DOWNLOAD": "Descargar",
+    "CREATE": "Crear Lista"
   }
 }
