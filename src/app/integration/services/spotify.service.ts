@@ -46,8 +46,8 @@ export class SpotifyService {
           return list.map(item => {
             return { id: item.payload.doc.id, user: item.payload.doc.data() }
           })
-        })).subscribe(data => {
-          if (data[0] == undefined) {
+        })).subscribe(data2 => {
+          if (data2[0] == undefined) {
             console.log("No existe el usuario")
             this._fireStoreService.createUser(fireBaseData).then(() => {
               console.log('Usuario creado exitósamente!');
@@ -55,7 +55,7 @@ export class SpotifyService {
               console.error(error);
             });
           } else {
-            console.log(data[0].user);
+            console.log(data2[0].user);
           }
         });
         console.log(data)
@@ -150,10 +150,10 @@ export class SpotifyService {
     }
     return this.postInfo(`playlists/` + playListId + `/tracks`, body);
   }
-  createPlaylist(name: string, userId: string) {
+  createPlaylist(name: string, userId: string, desc: string) {
     let body = {
       name: name,
-      description: 'desc'
+      description: desc
     }
     return this.postInfo(`users/` + userId + `/playlists?`, body);
   }
@@ -165,12 +165,12 @@ export class SpotifyService {
     return this.getInfo(`tracks/` + id);
   }
 
-  createAndAddPlaylist(name: string, userId: string, idList: any[]) {
-    return this.createPlaylist(name, userId);
+  createAndAddPlaylist(name: string, userId: string, idList: any[], desc: string) {
+    return this.createPlaylist(name, userId, desc);
   }
 
-  createFullPlayList(name: string, userId: string, idList: any[]) {
-   this.createPlaylist(name, userId).subscribe((data:any) => {
+  createFullPlayList(name: string, userId: string, idList: any[], desc) {
+   this.createPlaylist(name, userId, desc).subscribe((data:any) => {
      this.addSongsToPlayList(data.id, idList).subscribe(data2 => {
        return data2;
      });

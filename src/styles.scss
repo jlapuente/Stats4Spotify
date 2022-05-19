@@ -15,6 +15,15 @@ body {
   --font-size: 50px;
 }
 
-.modal-backdrop{
+.modal-backdrop {
   z-index: auto !important;
+}
+
+.spotify-snackbar {
+  background: #303030;
+  color: var(--primary-color);
+}
+.error-snackbar {
+  background: #F44336;
+  color: white;
 }

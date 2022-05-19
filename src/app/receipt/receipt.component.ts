@@ -4,7 +4,8 @@ import { CONSTANTS, SelectOption } from '../properties/constants';
 import html2canvas from 'html2canvas';
 import { saveAs } from '../../../node_modules/file-saver';
 import { TranslateService } from '@ngx-translate/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-receipt',
@@ -12,8 +13,8 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
   styleUrls: ['./receipt.component.scss'],
 })
 export class ReceiptComponent implements OnInit {
-  
-  constructor(private _spotifyService: SpotifyService, private translate: TranslateService) { }
+
+  constructor(private _spotifyService: SpotifyService, private translate: TranslateService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   year: number;
   username: string;
@@ -42,6 +43,14 @@ export class ReceiptComponent implements OnInit {
   dataSource = new MatTableDataSource();
   loading = false;
 
+
+  readonly TRACKS = 'tracks';
+  readonly ARTIST = 'artist';
+
+  readonly SHORT_TERM = "short_term";
+  readonly MEDIUM_TERM = "medium_term";
+  readonly LONG_TERM = "long_term";
+
   ngOnInit() {
     this.initializeCombos();
   }
@@ -56,7 +65,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   getReceipt() {
-    this.isArtist = this.selectedSearch.value == this.searchList[1].value;
+    this.isArtist = this.selectedSearch.value == this.ARTIST;
     this.year = new Date().getFullYear();
     this.date = new Date();
     this.username = "";
@@ -64,7 +73,7 @@ export class ReceiptComponent implements OnInit {
     this.url = "jlapuente.github.io/Stats4Spotify/";
     this.loading = true;
 
-    if (this.selectedSearch.value == 'artist') {
+    if (this.selectedSearch.value == this.ARTIST) {
       this._spotifyService.getTopArtist(this.selectedOption.value, CONSTANTS.TEN_ESCALE).subscribe((data: any) => {
         this.items = data.items;
         this.membership = this._spotifyService.user.product;
@@ -93,6 +102,9 @@ export class ReceiptComponent implements OnInit {
         saveAs(blob, "receipt.png");
       });
     });
+    if (this.selectedSearch.value == this.TRACKS){
+      this.openDialog();
+    }
   }
 
   initializeCombos() {
@@ -100,35 +112,35 @@ export class ReceiptComponent implements OnInit {
     // We prepare the combos with the translations
     this.translate.get('RECEIPT.SONGS').subscribe((res: string) => {
       let option = new SelectOption();
-      option.value = 'tracks';
+      option.value = this.TRACKS;
       option.viewValue = res;
       this.searchList.push(option);
     });
 
     this.translate.get('RECEIPT.ARTIST').subscribe((res: string) => {
       let option = new SelectOption();
-      option.value = 'artist';
+      option.value = this.ARTIST;
       option.viewValue = res;
       this.searchList.push(option);
     });
 
     this.translate.get('RECEIPT.LAST_MONTH').subscribe((res: string) => {
       let option = new SelectOption();
-      option.value = 'short_term';
+      option.value = this.SHORT_TERM;
       option.viewValue = res;
       this.selectOptions.push(option);
     });
 
     this.translate.get('RECEIPT.LAST_SIX_MONTHS').subscribe((res: string) => {
       let option = new SelectOption();
-      option.value = 'medium_term';
+      option.value = this.MEDIUM_TERM;
       option.viewValue = res;
       this.selectOptions.push(option);
     });
 
     this.translate.get('RECEIPT.FROM_THE_BEGINNING').subscribe((res: string) => {
       let option = new SelectOption();
-      option.value = 'long_term';
+      option.value = this.LONG_TERM;
       option.viewValue = res;
       this.selectOptions.push(option);
       this.selectedOption = this.selectOptions[0];
@@ -139,7 +151,7 @@ export class ReceiptComponent implements OnInit {
 
   getSavedTracks(updateSearch) {
     console.log(updateSearch);
-    this.displayedColumns =  this.isMobile? ['index', 'name', 'artist'] : ['index', 'name', 'artist'];
+    this.displayedColumns = ['index', 'name', 'artist'];
     if (this.listOfSongs.length == 0 || updateSearch) {
       this.loading = true;
       this._spotifyService.getTopTracks2(this.selectedOption.value, 50).subscribe((data: any) => {
@@ -163,16 +175,16 @@ export class ReceiptComponent implements OnInit {
     console.log('Row clicked: ', row);
   }
 
-  getIds() {
-    this.idList = this.listOfSongs.map(obj => {
+  getIds(items) {
+    this.idList = items.map(obj => {
       return obj.uri
     });
   }
 
   createList() {
-    this.getIds();
+    this.getIds(this.listOfSongs);
     this.loading = true;
-    this._spotifyService.createPlaylist('Mi top 50 canciones - ' + this.selectedOption.viewValue, this._spotifyService.user.id).subscribe((data: any) => {
+    this._spotifyService.createPlaylist('Mi top 50 canciones - ' + this.selectedOption.viewValue, this._spotifyService.user.id, "Playlist con las 50 canciones mas escuchadas de " + this.username).subscribe((data: any) => {
       this._spotifyService.addSongsToPlayList(data.id, this.idList).subscribe(() => {
         console.log("Playlist creada y canciones añadidas");
         this.loading = false;
@@ -181,17 +193,50 @@ export class ReceiptComponent implements OnInit {
   }
 
   changeView() {
-/*     var downloadButton = <HTMLInputElement>document.getElementById('download-button');
- */    this.receipt = !this.receipt;
+    this.receipt = !this.receipt;
     if (this.receipt) {
-/*       downloadButton.disabled = false;
- */      if (this.items.length == 0) {
+      if (this.items.length == 0) {
         this.updateSearch()
       }
     } else {
-/*       downloadButton.disabled = true;
- */      this.getSavedTracks(false);
+      this.getSavedTracks(false);
     }
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.createTopList();
+      }
+    });
+  }
+
+  createTopList() {
+    this.getIds(this.items);
+    this.loading = true;
+    this._spotifyService.createPlaylist('Mi top 10 canciones - ' + this.selectedOption.viewValue, this._spotifyService.user.id, "Playlist con las 10 canciones mas escuchadas por " + this.username + " a fecha de " + this.date).subscribe((data: any) => {
+      this._spotifyService.addSongsToPlayList(data.id, this.idList).subscribe(() => {
+        console.log("Playlist creada y canciones añadidas");
+        this.loading = false;
+        this.snackBar.open('Playlist creada', '', {
+          duration: 4000,
+          panelClass: ['spotify-snackbar']
+        });
+      }, error => {
+        this.snackBar.open('Error al crear la playlist', '', {
+          duration: 4000,
+          panelClass: ['error-snackbar']
+        });
+      })
+    })
+  }
+
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'dialog.component.html',
+})
+export class DialogComponent { }

@@ -110,7 +110,7 @@ export class PlayListComponent implements OnInit {
       idList.push(element.uri);
     });
     this.loading = true;
-    this._spotifyService.createAndAddPlaylist(this.playlistName, this._spotifyService.user.id, idList).subscribe((data: any) => {
+    this._spotifyService.createAndAddPlaylist(this.playlistName, this._spotifyService.user.id, idList, "Lista creada por @stats4spotify").subscribe((data: any) => {
       console.log(data);
       if (idList.length !== 0) {
         this._spotifyService.addSongsToPlayList(data.id, idList).subscribe((data2: any) => {

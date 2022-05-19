@@ -4,7 +4,7 @@
 }
 
 .receiptContainer {
-  color:black;
+  color: black;
 }
 
 h1 {
@@ -231,6 +231,12 @@ table.tracks td {
   }
 }
 
+.filterContainer {
+  /* margin-left: 40%; */
+  margin-top: 40%;
+  color: white !important;
+}
+
 @media only screen and (max-width: 767px) {
   #options {
     flex-direction: column;
@@ -243,17 +249,23 @@ table.tracks td {
   .container {
     width: 100%;
   }
-}
-.filterContainer {
-  /* margin-left: 40%; */
-  margin-top: 40%;
-  color: white !important;
-}
-@media only screen and (max-width: 767px) {
+
+  .mat-form-field {
+    width: 50% !important;
+  }
+
+  .filterContainer {
+    margin-left: 0;
+  }
+
+  #download-button {
+    width: 100%;
+  }
+
   .filterContainer {
     margin: 0;
-    margin-left: 20%;
   }
+
   .mat-filter {
     width: 80%;
   }
@@ -262,6 +274,7 @@ table.tracks td {
 .mat-column-duration_ms {
   text-align: right;
 }
+
 .mat-column-artist {
   text-align: right;
 }
