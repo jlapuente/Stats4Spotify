@@ -28,6 +28,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HistorialComponent } from './historial/historial.component';
+import { AlbumtifyComponent } from './albumtify/albumtify.component';
 
 
 
@@ -63,7 +64,8 @@ const EXTERNAL_MODULES = [
     PlayListComponent,
     ArtistSanitizerPipe,
     HistorialComponent,
-    DialogComponent
+    DialogComponent,
+    AlbumtifyComponent
   ],
   entryComponents: [DialogComponent],
   imports: [

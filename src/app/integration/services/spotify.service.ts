@@ -13,7 +13,7 @@ export class SpotifyService {
     clientId: SECRET_CONSTANTS.client_id,
     clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: SECRET_CONSTANTS.redirect_uri_pro
+    redirect_uri: SECRET_CONSTANTS.redirect_uri
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
 
