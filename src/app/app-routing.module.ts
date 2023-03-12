@@ -11,14 +11,14 @@ import { PlayListComponent } from './play-list/play-list.component';
 import { ReceiptComponent } from './receipt/receipt.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
-  { path: 'about-us', component: AboutUsComponent },
-  { path: 'graphs', component: GraficosComponent, canActivate: [AuthGuardService]},
-  { path: 'receipt', component: ReceiptComponent, canActivate: [AuthGuardService]},
-  { path: 'comp', component: ComparationComponent, canActivate: [AuthGuardService]},
-  { path: 'history', component: HistorialComponent, canActivate: [AuthGuardService]},
-  { path: 'playlist', component: PlayListComponent, canActivate: [AuthGuardService]},
-  { path: 'albumtify', component: AlbumtifyComponent, canActivate: [AuthGuardService]},
+  { path: 'home', component: HomeComponent, pathMatch: 'full'},
+  { path: 'about-us', component: AboutUsComponent , pathMatch: 'full'},
+  { path: 'graphs', component: GraficosComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  { path: 'receipt', component: ReceiptComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  { path: 'comp', component: ComparationComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  { path: 'history', component: HistorialComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  { path: 'playlist', component: PlayListComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
+  { path: 'albumtify', component: AlbumtifyComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
   // { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
