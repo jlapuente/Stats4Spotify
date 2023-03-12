@@ -17,25 +17,35 @@ export class AppComponent {
 
   constructor(private _activatedRoute: ActivatedRoute, private _location: Location, private _previousRouteService: PreviousRouteService,
     private _router: Router, private _SpotifyService: SpotifyService) {
-
     this._previousRouteService.registerUrls();
-    function getHashParams(q) {
-      let hashParams = {}, e, r = /([^&;=]+)=?([^&;]*)/g;
-
-      while (e = r.exec(q)) {
-        hashParams[e[1]] = decodeURIComponent(e[2]);
-      }
-      return hashParams;
-    }
     this._router.events.subscribe(data => {
+      console.log('data', data);
       if (data instanceof RoutesRecognized) {
-        const URL = this._location.path();
-        if (URL.split('=')[0] === 'access_token') {
-          let param = getHashParams(URL);
-          const NewToken = param['access_token'];
-          NewToken && (sessionStorage.setItem('token', NewToken), this._SpotifyService.upDateToken());
-        }
+        let anchor = data.url;
+        console.log(anchor);
+        let token = anchor.split('=');
+        token[1] = token[1].replace('token_type', '')
+        console.log(token[1]);
+        sessionStorage.setItem('token', token[1]), this._SpotifyService.updateToken()
+
+      //   const URL = this._location.path();
+      //   if (URL.split('=')[0] === 'access_token') {
+      //     let param = this.getHashParams(URL);
+      //     console.log(param);
+      //     const NewToken = param['access_token'];
+      //     NewToken && (sessionStorage.setItem('token', NewToken), this._SpotifyService.updateToken());
+      //   }
       }
     });
+  }
+  getHashParams(q) {
+    let hashParams = {}, e, r = /([^&;=]+)=?([^&;]*)/g;
+    while (e = r.exec(q)) {
+      hashParams[e[1]] = decodeURIComponent(e[2]);
+    }
+    console.log(e)
+    console.log(r)
+    console.log(hashParams)
+    return hashParams;
   }
 }

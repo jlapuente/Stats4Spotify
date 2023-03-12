@@ -13,7 +13,7 @@ export class SpotifyService {
     clientId: SECRET_CONSTANTS.client_id,
     clientSecret: SECRET_CONSTANTS.secret_id,
     accessToken: '',
-    redirect_uri: SECRET_CONSTANTS.redirect_uri_pro
+    redirect_uri: SECRET_CONSTANTS.redirect_uri
   };
   scopes: string = 'user-library-read,user-read-private, user-top-read, playlist-modify-private, playlist-modify-public';
 
@@ -29,12 +29,12 @@ export class SpotifyService {
   songs = [];
 
   constructor(private _httpClient: HttpClient, private _fireStoreService: FirestoreService) {
-    if(sessionStorage.getItem('user') == null || this.user == null){
-      this.upDateToken()
+    if (sessionStorage.getItem('user') == null || this.user == null) {
+      this.updateToken()
     }
   }
 
-  upDateToken() {
+  updateToken() {
     this.credentials.accessToken = sessionStorage.getItem('token') || '';
     if (this.user == undefined) {
       this.getCurrentUser().subscribe((data: any) => {
@@ -62,6 +62,8 @@ export class SpotifyService {
       }, error => {
         error.status == 401 && (this.tokenRefreshURL());
       })
+    } else {
+      window.location.href = this.credentials.redirect_uri;
     }
   }
 
@@ -74,14 +76,20 @@ export class SpotifyService {
   postInfo(query: string, body: any) {
     const URL = `https://api.spotify.com/v1/${query}`;
     const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
+    console.log('header', HEADER)
     return this._httpClient.post(URL, body, HEADER);
   }
 
   checkTokenSpoLogin() {
+    console.log(this.checkTokenSpo())
+    console.log(this.poolURlS.authorize)
+    console.log(location.href);
     this.checkTokenSpo() || (sessionStorage.setItem('refererURL', location.href), window.location.href = this.poolURlS.authorize);
   }
 
   checkTokenSpo() {
+    // console.log(!!this.credentials.accessToken);
+    // console.log(this.credentials.accessToken);
     return !!this.credentials.accessToken;
   }
 
@@ -95,27 +103,19 @@ export class SpotifyService {
   }
 
   getNewReleases() {
-
     return this.getInfo('browse/new-releases?limit=4&offset=0').pipe(map((data: any) => data.albums.items));
-
   }
 
   getArtistas(v: string) {
-
     return this.getInfo(`search?q=${v}&type=artist&limit=50&offset=0`).pipe(map((data: any) => data.artists.items));
-
   }
 
   getArtista(v: string) {
-
     return this.getInfo(`artists/${v}`);
-
   }
 
   getTopTracks(v: string) {
-
     return this.getInfo(`artists/${v}/top-tracks?country=es`);
-
   }
 
   getTopTracks2(v: string, limit: number) {
@@ -170,12 +170,12 @@ export class SpotifyService {
   }
 
   createFullPlayList(name: string, userId: string, idList: any[], desc) {
-   this.createPlaylist(name, userId, desc).subscribe((data:any) => {
-     this.addSongsToPlayList(data.id, idList).subscribe(data2 => {
-       return data2;
-     });
-   }, error => {
-     return error;
-   }) 
+    this.createPlaylist(name, userId, desc).subscribe((data: any) => {
+      this.addSongsToPlayList(data.id, idList).subscribe(data2 => {
+        return data2;
+      });
+    }, error => {
+      return error;
+    })
   }
 }

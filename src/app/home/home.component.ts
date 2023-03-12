@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit} from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { SpotifyService } from '../integration/services/spotify.service';
 import { CONSTANTS, SelectOption } from '../properties/constants';
 import { DOCUMENT } from '@angular/common';
@@ -21,43 +21,38 @@ export class HomeComponent implements OnInit {
   languages: any[];
 
   constructor(private _spotifyService: SpotifyService, @Inject(DOCUMENT) private document: Document, private translate: TranslateService) {
-
+    console.log(this._spotifyService.credentials);
     if (this._spotifyService.checkTokenSpo()) {
-
       this.loading = true;
-
       this._spotifyService.getTopArtist("long_term", CONSTANTS.SIX_ESCALE).subscribe((data: any) => {
-
         console.log(this._spotifyService.credentials);
         console.log(data);
         this.songList = data.items;
         this.loading = false;
         // this.createMatriz(this.songList);
       }, error => {
-
         error.status == 401 && (this._spotifyService.tokenRefreshURL());
-
       });
-
+    } else {
+      this._spotifyService.tokenRefreshURL();
     }
-
   }
 
-  redirect(url){
+  redirect(url) {
     // console.log(url.spotify);
     this.document.location.href = url.spotify;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.languages = [
-      {value: 'en', label: 'uk'},
-      {value: 'es', label: 'spain'},
+      { value: 'en', label: 'uk' },
+      { value: 'es', label: 'spain' },
     ]
     this.langSession = sessionStorage.getItem("lang");
-    if(this.langSession != null && this.langSession.indexOf("-") > 0 ){
+    if (this.langSession != null && this.langSession.indexOf("-") > 0) {
       this.langSession = this.langSession.split("-")[0];
     }
-    if(this.langSession){
+    if (this.langSession) {
       this.selectedLanguage = this.langSession;
       this.translate.use(this.langSession);
     } else {
@@ -67,14 +62,14 @@ export class HomeComponent implements OnInit {
     console.log(this.langSession);
   }
 
-  changeLanguage(){
+  changeLanguage() {
     this.translate.use(this.selectedLanguage);
     sessionStorage.setItem("lang", this.selectedLanguage);
   }
 
   getLang() {
-  if (navigator.languages != undefined)
-    return navigator.languages[0];
-  return navigator.language;
-}
+    if (navigator.languages != undefined)
+      return navigator.languages[0];
+    return navigator.language;
+  }
 }
