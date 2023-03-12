@@ -39,8 +39,7 @@
               {{ 'RECEIPT.ORDER' | translate }}#0001 - {{date | date:'dd/MM/yy'}}
             </p>
             <p class="date" *ngIf="selectedSearch">
-              {{ 'RECEIPT.MOST_LISTENED' | translate:'{param:"'+ selectedSearch.viewValue +'",
-              otherparam:"'+username+'"}'}}
+              {{ 'RECEIPT.MOST_LISTENED' | translate:'{param:"'+ selectedSearch.viewValue +'",otherparam:"'+username+'"}'}}
             </p>
             <table class="tracks">
               <thead>

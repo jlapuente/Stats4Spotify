@@ -1,1 +1,57 @@
-<p>albumtify works!</p>
+<div class="wrapper" *ngIf="!loading">
+  <div class="container">
+    <div class="row flex-row">
+      <div class="col-xs-12 col-md-4 intro">
+        <small>{{ 'WELCOME.RECENTLY_LISTENED' | translate }}</small>
+        <h1 class="display-2 premium-display-2" style="font-size: 48px;">{{ 'WELCOME.WELCOME_BACK' | translate }}</h1>
+        <h3>{{ 'WELCOME.BACK_TO_LAST_LISTENED' | translate }}</h3>
+        <a mat-raised-button color="primary" id="seg-hp-open-player" role="button" [routerLink]="'/receipt'"> {{
+          'WELCOME.OPEN_WEB_NAV' | translate }}</a>
+      </div>
+      <div class="col-xs-12 col-md-8">
+        <div class="row" style="display: unset; flex-wrap: unset;">
+          <div class="album-results">
+            <ul>
+              <li *ngFor="let album of listOfSongs" class="js-album-results-1" tabindex="0" data-sr-id="4"
+                style="visibility: visible; opacity: 1; transition: opacity 0.5s cubic-bezier(0.5, 0, 0, 1) 0s; width: 32%;">
+                <figure (click)="redirect(album.external_urls)">
+                  <div class="box">
+                    <div class="content">
+                      <img class="img-responsive" [src]="album.images[0].url" title="album.name" alt="album.artists"
+                        (click)="redirect(album.external_urls)">
+                    </div>
+                  </div>
+                  <div class="hidden-xs content-overlay" (click)="redirect(album.external_urls)"></div>
+                  <div class="hidden-xs content-details">
+                    <figcaption class="album-play-icon">
+                      <svg>
+                        <use xlink:href="#album-play"></use>
+                      </svg>
+                      <h2 class="text-white">{{album.name}}</h2>
+                      <!-- <h4 class="text-white">{{artist.name}}</h4> -->
+                    </figcaption>
+                  </div>
+                </figure>
+                <figcaption class="scroll hidden-sm hidden-md hidden-lg">
+                  <h2 style="color: white;" (click)="redirect(album.external_urls)">{{album.name}}</h2>
+                  <!-- <h4 (click)="redirect(artist.external_urls)">{{artist.name}}</h4> -->
+                  <!--   <div id="segmented-play-now" class="btn btn-link" role="button">
+                    <a mat-raised-button color="primary" (click)="redirect(artist.external_urls)">
+                      {{ 'WELCOME.LISTEN_NOW' | translate }}
+                    </a>
+                  </div> -->
+                </figcaption>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="layout"></div>
+
+
+<div class="loading-spinner" *ngIf="loading">
+  <img src="assets/Spinner-1s-200px.svg" alt="loading spinner" style="margin: auto; display: block;">
+</div>
